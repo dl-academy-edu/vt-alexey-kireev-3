@@ -12,6 +12,17 @@
   <link rel="shortcut icon" href="/static/images/favicon.ico">
   <title>Portfolio</title>
   <meta name="description" content="Portfolio" />
+
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
+  <link href="/common.css" rel="stylesheet" />
+  <link href="style.css" rel="stylesheet" />
+  <link rel="stylesheet" href="/static/fonts/oswald.css" />
+  <link rel="shortcut icon" href="/static/images/favicon.ico">
+  <title>Главная</title>
 </head>
 
 <body>
@@ -245,6 +256,16 @@
   <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
   <script src="/static/images/js/script.js"></script>
   <script src="/static/images/js/common.js"></script>
+
+  <main class="main">
+    <div class="inner">
+      <ul class="header"></ul>
+      <ul class="content"></ul>
+    </div>
+
+  </main>
+  @@include('footer/index.html')
+  <script src="./scripts.js"></script>
 </body>
 
 </html>
