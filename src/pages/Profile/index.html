@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
+  <link href="/common.css" rel="stylesheet" />
+  <link href="style.css" rel="stylesheet" />
+  <link rel="stylesheet" href="/static/fonts/stylesheet.css" />
+  <link rel="shortcut icon" href="/static/images/favicon.ico">
+  <title>My Profile</title>
+  <meta name="description" content="My Profile" />
+</head>
+
+<body>
+  @@include('header/index.html')
+  <main>
+    <section class="profile container">
+      <div class="profile__inner-title">
+        <h1 class="profile__title">My profile</h1>
+        <button class="header__mobile-button header__mobile-button_profile header__mobile-button_js">
+          <span class="header__mobile-icon"></span>
+          <span class="header__mobile-icon"></span>
+          <span class="header__mobile-icon"></span>
+        </button>
+      </div>
+      <div class="profile__wrapper">
+        <div class="profile__inner-photo photo_js">
+        </div>
+        <div class="profile__inner-info">
+          <ul class="profile__list">
+            <li class="profile__item">
+              <strong class="profile__text">Name: </strong>
+              <span class="profile__text-info name_js"></span>
+            </li>
+            <li class="profile__item">
+              <strong class="profile__text">Surname: </strong>
+              <span class="profile__text-info surname_js"></span>
+            </li>
+            <li class="profile__item">
+              <strong class="profile__text">Email: </strong>
+              <span class="profile__text-info email_js"></span>
+            </li>
+            <li class="profile__item">
+              <strong class="profile__text">Password: </strong>
+              <span class="profile__text-info password_js">**********</span>
+            </li>
+            <li class="profile__item">
+              <strong class="profile__text">Location: </strong>
+              <span class="profile__text-info location_js"></span>
+            </li>
+            <li class="profile__item">
+              <strong class="profile__text">Age: </strong>
+              <span class="profile__text-info age_js"></span>
+            </li>
+          </ul>
+          <button class="button profile__button changePasswordOpen_js" type="button" aria-label="Go to Change password"
+            title="Change password">Change password</button>
+          <button class="button profile__button changeDataOpen_js" type="button" aria-label="Go to Change other data"
+            title="Change other data">Change other data</button>
+          <button class="button profile__button deleteAccount_js" type="submit" aria-label="Go to Delete account"
+            title="Delete account">Delete account</button>
+        </div>
+      </div>
+    </section>
+    @@include('changeProfile/index.html')
+    @@include('changePassword/index.html')
+
+  </main>
+  <script src="/static/images/js/common.js"></script>
+  <script src="/static/images/js/script.js"></script>
+  <script src="/static/images/js/profile.js"></script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,116 @@
+@import "./../../components/vars";
+@import "../../components/changeProfile/changeProfile";
+.profile {
+  &__title {
+    font-family: "Gilroy", Arial, sans-serif;
+
+    font-weight: bold;
+    font-size: 47px;
+    line-height: 57px;
+
+    color: #070707;
+
+    @media screen and (max-width: $sm) {
+      max-width: 205px;
+      margin: 40px 0 25px 3px;
+    }
+  }
+
+  &__inner-photo {
+    display: block;
+    width: 100%;
+    max-width: 320px;
+    height: 450px;
+    background: #f6f6f6;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.25);
+    margin-right: 105px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+
+    @media screen and (max-width: $sm) {
+      margin: auto;
+    }
+
+    @media screen and (max-width: $mo) {
+      height: auto;
+      padding-top: 153%;
+    }
+  }
+
+  &__inner-info {
+    @media screen and (max-width: $sm) {
+      margin: 1px 0 0 21px;
+    }
+  }
+
+  &__img {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    width: 100.5%;
+    height: 100.5%;
+    max-width: initial;
+  }
+
+  &__button {
+    padding: 7px 17px;
+    margin-bottom: 21px;
+  }
+
+  &__list {
+    margin-bottom: 33px;
+  }
+
+  &__item {
+    margin-bottom: 19.5px;
+  }
+
+  &__inner-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 40px 0 25px 3px;
+    @media screen and (max-width: $sm) {
+      margin: 40px 0 -5px 3px;
+    }
+  }
+
+  &__wrapper {
+    align-items: flex-start;
+    display: flex;
+    margin-left: -23px;
+
+    @media screen and (max-width: $md) {
+      margin-left: -17px;
+    }
+
+    @media screen and (max-width: $sm) {
+      flex-direction: column;
+      margin: 3px -25px 0px -14px;
+    }
+  }
+
+  &__text {
+    font-family: "Gilroy", Arial, sans-serif;
+
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 22px;
+
+    color: #070707;
+  }
+
+  &__text-info {
+    font-family: "Gilroy", Arial, sans-serif;
+
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 21px;
+
+    color: #070707;
+  }
+}

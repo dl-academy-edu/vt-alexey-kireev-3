@@ -1,0 +1,48 @@
+.popup { 
+    &__box {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+    &__form {
+        &_changeData { 
+        width: 680px;
+        }
+    }
+    &__lable {
+
+        &_custom {
+            width: 48.5%;
+            
+        }
+    }
+
+    &__customFile {
+        display: flex;
+        flex-direction: column;
+    }
+    &__fileText {
+        position: relative;
+        padding: 14px 0 14px 40px;
+
+        font-family: Gilroy;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 21px;
+
+        color: #070707;
+
+    }
+    &__uploadFile_img {
+        position: absolute;
+        width: 16px;
+        height: 14px;
+        top: 18px;
+        left: 14px;
+    }
+    &__container {
+        display: flex;
+        align-items: center;
+    }
+}

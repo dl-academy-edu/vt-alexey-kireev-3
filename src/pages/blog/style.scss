@@ -1,0 +1,677 @@
+@import "./../../components/vars";
+
+.blog {
+  &__title {
+    margin: 40px 0px;
+
+    font-family: "Gilroy", Arial, sans-serif;
+
+    font-weight: bold;
+    font-size: 47px;
+    line-height: 57px;
+
+    color: #070707;
+
+    @media screen and (max-width: $sm) {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 150px;
+    }
+  }
+
+  &__inner-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 3px;
+  }
+
+  &__form {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-bottom: 21px;
+
+    @media screen and (max-width: $md) {
+      margin-bottom: 17px;
+    }
+
+    @media screen and (max-width: 290px) {
+      flex-direction: column;
+    }
+  }
+}
+
+.search {
+  margin-top: 26px;
+  width: 100%;
+  display: flex;
+
+  @media screen and (max-width: $md) {
+    order: 6;
+  }
+
+  @media screen and (max-width: $sm) {
+    display: block;
+  }
+
+  &__input {
+    max-width: 873px;
+    width: 100%;
+    height: 50px;
+    border: 2.5px solid #e5e5e5;
+
+    padding: 5px 10px;
+
+    &:hover {
+      border: 2.5px solid #828282;
+    }
+
+    &:focus {
+      border: 2.5px solid #070707;
+    }
+  }
+
+  &__button {
+    margin-left: 34px;
+    margin-top: 4px;
+
+    max-width: 97px;
+    height: 42px;
+
+    @media screen and (max-width: $sm) {
+      margin-left: auto;
+      margin-top: 20px;
+    }
+  }
+}
+
+.tags {
+  display: block;
+  @media screen and (max-width: $md) {
+    order: 5;
+    width: 60%;
+    margin-top: 12px;
+  }
+
+  @media screen and (max-width: $sm) {
+    width: 49%;
+    margin-top: 9px;
+  }
+
+  @media screen and (max-width: 290px) {
+    width: initial;
+  }
+
+  &__title {
+    margin-bottom: 10px;
+
+    font-family: "Gilroy", Arial, sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 16px;
+
+    color: #070707;
+  }
+
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    max-width: 115px;
+  }
+}
+
+.views {
+  display: block;
+  position: relative;
+  left: -6px;
+
+  @media screen and (max-width: $md) {
+    left: 0px;
+    order: 2;
+  }
+
+  @media screen and (max-width: $sm) {
+    width: 49%;
+    left: 7px;
+  }
+
+  @media screen and (max-width: 290px) {
+    width: initial;
+    left: 0;
+  }
+
+  &__title {
+    margin-bottom: 10px;
+
+    font-family: "Gilroy", Arial, sans-serif;
+
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 16px;
+
+    color: #070707;
+  }
+
+  &__text {
+    font-family: "Gilroy", Arial, sans-serif;
+
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 21px;
+
+    margin-left: 37px;
+    color: #070707;
+  }
+
+  &__label {
+    cursor: pointer;
+
+    display: flex;
+    position: relative;
+    margin-bottom: 15px;
+  }
+
+  &__box {
+    position: absolute;
+
+    display: block;
+
+    width: 25px;
+    height: 25px;
+
+    background-image: url(/static/images/radio.svg);
+    opacity: 0.2;
+    &::before {
+      content: "";
+      position: absolute;
+      top: 3px;
+      right: 3px;
+      bottom: 3px;
+      left: 3px;
+    }
+  }
+
+  &__input {
+    &:focus + &__label {
+      outline: 1px solid rgb(0, 0, 0);
+    }
+  }
+
+  &__input:checked ~ &__box {
+    opacity: 1;
+  }
+}
+
+.comments {
+  display: block;
+  position: relative;
+  left: -17px;
+
+  @media screen and (max-width: $md) {
+    order: 1;
+    left: 0px;
+  }
+
+  @media screen and (max-width: $sm) {
+    width: 49%;
+  }
+
+  @media screen and (max-width: 290px) {
+    width: initial;
+  }
+
+  &__title {
+    margin-bottom: 10px;
+
+    font-family: "Gilroy", Arial, sans-serif;
+
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 16px;
+
+    color: #070707;
+  }
+
+  &__list {
+  }
+
+  &__text {
+    font-family: "Gilroy", Arial, sans-serif;
+
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 21px;
+
+    margin-left: 35px;
+    color: #070707;
+  }
+
+  &__input {
+    &:focus + &__label {
+      outline: 1px solid rgb(0, 0, 0);
+    }
+
+    &:focus,
+    &:hover ~ .comments__box {
+      border: 2px solid #828282;
+    }
+
+    &:checked ~ .comments__box {
+      border: 2px solid #000000;
+    }
+
+    &:checked ~ .comments__box::before {
+      content: "✔";
+      position: absolute;
+      left: 3px;
+
+      font-weight: 700;
+      font-size: 20px;
+      color: #000;
+    }
+  }
+
+  &__label {
+    cursor: pointer;
+
+    display: flex;
+    position: relative;
+    margin-bottom: 15px;
+  }
+
+  &__box {
+    position: absolute;
+    display: block;
+    border: 2px solid #e5e5e5;
+    box-sizing: border-box;
+    border-radius: 3px;
+
+    width: 25px;
+    height: 25px;
+
+    align-items: center;
+  }
+}
+
+.show {
+  display: block;
+  position: relative;
+  left: 37px;
+
+  @media screen and (max-width: $md) {
+    order: 4;
+    left: 0px;
+  }
+
+  @media screen and (max-width: $sm) {
+    width: 49%;
+    margin-top: 26px;
+    left: 7px;
+  }
+
+  @media screen and (max-width: 290px) {
+    width: initial;
+    left: 0;
+  }
+
+  &__title {
+    margin-bottom: 10px;
+
+    font-family: "Gilroy", Arial, sans-serif;
+
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 16px;
+
+    color: #070707;
+  }
+
+  &__list {
+  }
+
+  &__item {
+    margin-bottom: 10px;
+  }
+
+  &__text {
+    font-family: "Gilroy", Arial, sans-serif;
+
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 21px;
+
+    margin-left: 37px;
+    color: #070707;
+  }
+  &__label {
+    cursor: pointer;
+
+    display: flex;
+    position: relative;
+    margin-bottom: 15px;
+  }
+  &__box {
+    position: absolute;
+
+    display: block;
+
+    width: 25px;
+    height: 25px;
+
+    background-image: url(/static/images/radio.svg);
+    opacity: 0.2;
+    &::before {
+      content: "";
+      position: absolute;
+      top: 3px;
+      right: 3px;
+      bottom: 3px;
+      left: 3px;
+    }
+  }
+
+  &__input {
+    &:focus + &__label {
+      outline: 1px solid rgb(0, 0, 0);
+    }
+  }
+
+  &__input:checked ~ &__box {
+    opacity: 1;
+  }
+}
+
+.sort {
+  display: block;
+  position: relative;
+  left: 32px;
+
+  @media screen and (max-width: $md) {
+    left: 0px;
+    order: 3;
+  }
+
+  @media screen and (max-width: $sm) {
+    width: 49%;
+    margin-top: 26px;
+  }
+
+  @media screen and (max-width: 290px) {
+    width: initial;
+  }
+
+  &__title {
+    margin-bottom: 10px;
+
+    font-family: "Gilroy", Arial, sans-serif;
+
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 16px;
+
+    color: #070707;
+  }
+
+  &__list {
+  }
+
+  &__item {
+    margin-bottom: 10px;
+  }
+
+  &__text {
+    font-family: "Gilroy", Arial, sans-serif;
+
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 21px;
+
+    margin-left: 37px;
+    color: #070707;
+  }
+  &__label {
+    cursor: pointer;
+
+    display: flex;
+    position: relative;
+    margin-bottom: 15px;
+  }
+  &__box {
+    position: absolute;
+
+    display: block;
+
+    width: 25px;
+    height: 25px;
+
+    background-image: url(/static/images/radio.svg);
+    opacity: 0.2;
+    &::before {
+      content: "";
+      position: absolute;
+      top: 3px;
+      right: 3px;
+      bottom: 3px;
+      left: 3px;
+    }
+  }
+
+  &__input {
+    &:focus + &__label {
+      outline: 1px solid rgb(0, 0, 0);
+    }
+  }
+
+  &__input:checked ~ &__box {
+    opacity: 1;
+  }
+}
+
+.reset {
+  display: block;
+  margin-top: 16px;
+
+  @media screen and (max-width: $md) {
+    order: 6;
+    position: absolute;
+    transform: translate(166px, 139px);
+    margin-top: 28px;
+  }
+
+  @media screen and (max-width: $sm) {
+    position: initial;
+    transform: translate(8px, -2px);
+    width: 49%;
+  }
+
+  @media screen and (max-width: 290px) {
+    width: initial;
+    transform: translate(0, 0);
+    margin-top: 0px;
+  }
+
+  &__title {
+    margin: -5px 0px 5px 11px;
+
+    font-family: "Gilroy", Arial, sans-serif;
+
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 16px;
+
+    color: #e5e5e5;
+  }
+
+  &__button {
+    margin-top: 5px;
+    max-width: 84px;
+    height: 42px;
+  }
+}
+
+.card {
+  display: block;
+  margin-top: 20px;
+  margin-bottom: 50px;
+
+  &__img {
+    min-width: 320px;
+    min-height: 236px;
+    margin-right: 20px;
+  }
+
+  &__box {
+    display: flex;
+    padding: 20px 20px 20px 0;
+    border-top: 2px solid #e5e5e5;
+
+    @media screen and (max-width: $sm) {
+      display: block;
+    }
+  }
+  &__tagBox {
+    display: flex;
+    margin-bottom: -7px;
+  }
+  &__tags {
+    margin-right: 5px;
+    margin-top: 3px;
+  }
+  &__tag {
+    display: block;
+    width: 30px;
+    height: 10px;
+    border-radius: 5px;
+  }
+  &__infoBox {
+    display: flex;
+    margin-bottom: 15px;
+  }
+  &__infoElem {
+    margin-right: 10px;
+  }
+  &__infoText {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 16px;
+
+    color: #828282;
+  }
+
+  &__title {
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 29px;
+
+    color: #070707;
+    margin-bottom: 10px;
+  }
+
+  &__text {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 21px;
+
+    color: #070707;
+    margin-bottom: 20px;
+  }
+
+  &__link {
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 22px;
+    border-bottom: 1px dashed #070707;
+
+    color: #070707;
+
+    margin-bottom: 15px;
+    outline: none;
+    &:hover,
+    &:focus {
+      border-bottom: 1px solid #070707;
+    }
+  }
+}
+
+.pagination {
+  display: flex;
+  margin-top: 30px;
+  justify-content: space-between;
+  align-items: center;
+
+  &__button {
+    border: none;
+    background: transparent;
+
+    &:hover svg > rect {
+      stroke: #828282;
+    }
+    &:hover svg > rect ~ rect {
+      fill: #828282;
+    }
+
+    &_disabled svg > rect {
+      stroke: #e5e5e5;
+    }
+
+    &_disabled svg > rect ~ rect {
+      fill: #e5e5e5;
+    }
+  }
+
+  &__num {
+    font-family: "Gilroy", Arial, sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 22px;
+
+    color: #e5e5e5;
+    margin-right: 10px;
+    &_active {
+      color: #000000;
+    }
+  }
+}
+
+.colorCheckbox {
+  cursor: pointer;
+
+  margin-right: 5px;
+  margin-bottom: 5px;
+  &:nth-child(4n) {
+    margin-right: 0;
+  }
+
+  &_box {
+    box-sizing: border-box;
+    display: block;
+    width: 25px;
+    height: 25px;
+  }
+
+  &__checkbox {
+    display: block;
+    position: relative;
+    width: 25px;
+    height: 25px;
+    border: 2px solid;
+    box-sizing: border-box;
+    border-radius: 5px;
+  }
+}
+
+.checkSVG {
+  display: none;
+  position: absolute;
+  top: 3px;
+  left: 3px;
+}
+
+.colorCheckbox__tag:checked ~ span .checkSVG {
+  display: block;
+}

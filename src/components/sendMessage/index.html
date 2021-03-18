@@ -1,0 +1,39 @@
+<div class="popup popupSendMessageOpen_js">
+    <form class="popup__form popup__form_register sendMassageForm_js" name="register">
+        <fieldset class="popup__box">
+            <label class="popup__lable popup__lable_custom">
+                <span class="popup__text requiared">What is your name?</span>
+                <input class="popup__input" type="text" name="name">
+            </label>
+            <label class="popup__lable popup__lable_custom">
+                <span class="popup__text requiared">Message subject</span>
+                <input class="popup__input" type="text" name="messageSubject">
+            </label>
+            <label class="popup__lable popup__lable_custom">
+                <span class="popup__text requiared">Your Email</span>
+                <input class="popup__input" type="email" name="email">
+            </label>
+            <label class="popup__lable popup__lable_custom">
+                <span class="popup__text requiared">Your mobile phone</span>
+                <input class="popup__input" type="tel" name="phone">
+            </label>
+            <label class="popup__lable">
+                <span class="popup__text">What do you want to discuss with me?</span>
+                <textarea class="popup__input popup__input_sendMessage"  maxlength="450" type="textarea" name="message"></textarea>
+            </label>
+        </fieldset>
+        <label class="popup__lable popup__container">
+            <input class="hidden popup__checkbox sendCheckbox_js" type="checkbox" name="agreement" value="yes">
+            <span class="popup__checkboxText">Clicking on the button, you consent to the processing of your personal data.</span>
+            <span class="popup__checkboxChecker"></span>
+        </label>
+        <button class="popup__button button sendEmail_js button_disabled sendButton_js" disabled type="submit">Send</button>
+        <button class="popup__close" type="button">
+            <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="2.82861" width="32" height="4" rx="2" transform="rotate(45 2.82861 0)" fill="#828282"/>
+                <rect y="22.6289" width="32" height="4" rx="2" transform="rotate(-45 0 22.6289)" fill="#828282"/>
+                </svg>                    
+        </button>
+    </form>
+</div>
+
