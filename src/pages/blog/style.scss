@@ -24,8 +24,6 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-
-    margin-bottom: 3px;
   }
 
   &__form {
@@ -45,12 +43,13 @@
 }
 
 .search {
-  margin-top: 26px;
+  margin-top: 20px;
   width: 100%;
   display: flex;
 
   @media screen and (max-width: $md) {
     order: 6;
+    margin-top: 33px;
   }
 
   @media screen and (max-width: $sm) {
@@ -93,12 +92,12 @@
   @media screen and (max-width: $md) {
     order: 5;
     width: 60%;
-    margin-top: 12px;
+    margin-top: 16px;
   }
 
   @media screen and (max-width: $sm) {
     width: 49%;
-    margin-top: 9px;
+    margin-top: 13px;
   }
 
   @media screen and (max-width: 290px) {
@@ -145,7 +144,7 @@
   }
 
   &__title {
-    margin-bottom: 10px;
+    margin-bottom: 12px;
 
     font-family: "Gilroy", Arial, sans-serif;
 
@@ -196,9 +195,10 @@
   }
 
   &__input {
-    &:focus + &__label {
-      outline: 1px solid rgb(0, 0, 0);
-    }
+    &:focus + .views__text {
+      outline: 2px solid #000000;
+      outline-offset: 2px;
+     }
   }
 
   &__input:checked ~ &__box {
@@ -225,7 +225,7 @@
   }
 
   &__title {
-    margin-bottom: 10px;
+    margin-bottom: 12px;
 
     font-family: "Gilroy", Arial, sans-serif;
 
@@ -251,9 +251,10 @@
   }
 
   &__input {
-    &:focus + &__label {
-      outline: 1px solid rgb(0, 0, 0);
-    }
+    &:focus + .comments__text {
+      outline: 2px solid #000000;
+      outline-offset: 2px;
+     }
 
     &:focus,
     &:hover ~ .comments__box {
@@ -300,7 +301,7 @@
 .show {
   display: block;
   position: relative;
-  left: 37px;
+  left: 40px;
 
   @media screen and (max-width: $md) {
     order: 4;
@@ -319,7 +320,7 @@
   }
 
   &__title {
-    margin-bottom: 10px;
+    margin-bottom: 12px;
 
     font-family: "Gilroy", Arial, sans-serif;
 
@@ -375,9 +376,10 @@
   }
 
   &__input {
-    &:focus + &__label {
-      outline: 1px solid rgb(0, 0, 0);
-    }
+    &:focus + .show__text {
+      outline: 2px solid #000000;
+      outline-offset: 2px;
+     }
   }
 
   &__input:checked ~ &__box {
@@ -405,7 +407,7 @@
   }
 
   &__title {
-    margin-bottom: 10px;
+    margin-bottom: 12px;
 
     font-family: "Gilroy", Arial, sans-serif;
 
@@ -461,9 +463,10 @@
   }
 
   &__input {
-    &:focus + &__label {
-      outline: 1px solid rgb(0, 0, 0);
-    }
+    &:focus + .sort__text {
+      outline: 2px solid #000000;
+      outline-offset: 2px;
+     }
   }
 
   &__input:checked ~ &__box {
@@ -478,13 +481,13 @@
   @media screen and (max-width: $md) {
     order: 6;
     position: absolute;
-    transform: translate(166px, 139px);
+    transform: translate(166px, 133px);
     margin-top: 28px;
   }
 
   @media screen and (max-width: $sm) {
     position: initial;
-    transform: translate(8px, -2px);
+    transform: translate(8px,-6px);
     width: 49%;
   }
 
@@ -519,10 +522,55 @@
   margin-bottom: 50px;
 
   &__img {
-    min-width: 320px;
-    min-height: 236px;
-    margin-right: 20px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    width: 100.5%;
+    height: 100.5%;
+    max-width: initial;
+
+    @media screen and (max-width: $md) {
+    min-height: 322px;
+    }
   }
+
+&__inner-img {
+  position: relative;
+
+  max-width: 320px;
+  min-width: 320px;
+  height: 236px;
+  width: 100%;
+
+  margin-right: 20px;
+  padding-top: 17%;
+
+  background-color: #c7c7c7;
+
+ @media screen and (max-width: $md) {
+  min-width: 314px;
+  max-width: 314px;
+  max-height: 268px;
+      height: 350px;
+
+      margin-bottom: 50px;
+    }
+
+    @media screen and (max-width: $sm) {
+      margin-bottom: 60px;
+    }
+
+    @media screen and (max-width: 365px) {
+      min-width: 280px;
+      height: 280px;
+      max-height: 280px;
+
+      margin-bottom: 20px;
+    }
+}
 
   &__box {
     display: flex;
@@ -600,11 +648,14 @@
 .pagination {
   display: flex;
   margin-top: 30px;
+  margin-bottom: -5px;
   justify-content: space-between;
   align-items: center;
 
   &__button {
+    cursor: pointer;
     border: none;
+    margin: 0px -7px 0px -7px;
     background: transparent;
 
     &:hover svg > rect {
@@ -616,11 +667,21 @@
 
     &_disabled svg > rect {
       stroke: #e5e5e5;
+      cursor: no-drop;
     }
 
     &_disabled svg > rect ~ rect {
-      fill: #e5e5e5;
+      fill: #e5e5e5;     
+       cursor: no-drop;
     }
+
+    &:disabled {
+      cursor: no-drop;
+    }
+  }
+
+  &__number {
+    margin: -5px -10px 0px 0px;
   }
 
   &__num {
@@ -632,13 +693,14 @@
 
     color: #e5e5e5;
     margin-right: 10px;
+    
     &_active {
       color: #000000;
     }
   }
 }
 
-.colorCheckbox {
+.tags-box {
   cursor: pointer;
 
   margin-right: 5px;
@@ -663,15 +725,28 @@
     box-sizing: border-box;
     border-radius: 5px;
   }
+
+  input {
+    &:focus + .tags-box__checkbox {
+      outline: 2px solid #000000;
+     }
+  }
+
+  &__tag {
+  
+    &:checked ~ span .tags-box__svg {
+      display: block;
+    }
+  }
+
+  &__svg {
+    display: none;
+    position: absolute;
+    top: 3px;
+    left: 3px;
+  }
 }
 
-.checkSVG {
-  display: none;
-  position: absolute;
-  top: 3px;
-  left: 3px;
-}
 
-.colorCheckbox__tag:checked ~ span .checkSVG {
-  display: block;
-}
+
+ 

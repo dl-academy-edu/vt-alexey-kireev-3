@@ -1,0 +1,62 @@
+.popup { 
+    &__box {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+    &__form {
+        &_changeData { 
+        width: 680px;
+        }
+    }
+    &__lable {
+      position: relative;
+        &_width {
+            width: 48.5%;
+            
+        }
+    }
+ 
+    &__upload{
+        &:focus  {
+            outline: 2px solid #000000;
+            outline-offset: 2px;
+          }
+    }
+
+    &__customFile {
+        display: flex;
+        flex-direction: column;     
+   
+    }
+    &__fileText {
+        display: flex;
+        position: absolute;
+        top: 0px;
+        left: 0;
+        margin-top: 22px;
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 21px;
+        padding: 13px 11px 13px 14px;
+        width: 100.5%;
+        height: 51px;
+        overflow: hidden;
+        white-space: nowrap;
+        word-wrap: normal;
+        text-overflow: ellipsis;
+        background-color: #fff;
+        border: 2px solid #e5e5e5;
+        transition: border-color .4s;
+    
+        &::before {
+            content: url(/static/images/file-upload.svg);
+            display: block;
+            width: 16px;
+            height: 16px;
+
+            margin-right: 10px;
+        }
+    }
+
+}

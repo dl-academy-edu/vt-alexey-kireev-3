@@ -32,7 +32,6 @@ function rerenderUser(userData) {
 function getUserDate() {
 
 
-
   if (!token || !userId) {
     return window.location = '/';
   }
@@ -40,26 +39,29 @@ function getUserDate() {
   fetchData({
     method: 'GET',
     url: `/api/users/${userId}`,
+  
 
   })
-    .then(res => {
-      return res.json();
+    .then(res => { 
+      return res.json();  
     })
     .then(res => {
-
+   
       if (res.success) {
         userData = res.data;
 
-        photo.style.cssText = `background-image: url('${SERVER_URL + userData.photoUrl}');`
+        photo.style.cssText = `background-image: url('${SERVER_URL + userData.photoUrl}');
+        background-position: center;
+        background-size: cover;`
         rerenderUser(userData);
-
+  
       } else {
-        throw res;
+        throw res;   
       }
 
     })
     .catch(err => {
-      console.error(err);
+      console.error(err);   
       return window.location = '/';
     })
 }
@@ -122,7 +124,10 @@ function getUserDate() {
 })();
 
 changeData.addEventListener('submit', function (e) {
-  changeUserData(e);
+  changeUserData(e); 
+  setTimeout(function(){
+    location.reload();
+  }, 1000);
 })
 
 changePassword.addEventListener('submit', function (e) {
@@ -210,7 +215,7 @@ function changeUserPassword(e) {
     .then(res => res.json())
     .then(res => {
 
-      if (res.success) {
+      if (res.success) {       
         userData = res.data;
         rerenderUser(userData);
         changePassword.classList.remove('popup_open');
@@ -300,3 +305,21 @@ function deleteUser(event) {
 
 
 }
+
+
+/* Поле загрузки изображения*/
+
+const output = document.querySelector('.popup__fileText');
+if (window.FileList && window.File) {
+  document.getElementById('avatar').addEventListener('change', event => {
+    output.innerHTML = '';
+    for (const file of event.target.files) {
+      const span = document.createElement('span');
+      const name = file.name ? file.name : 'NOT SUPPORTED';
+      span.textContent = `${name}`;
+      output.appendChild(span); 
+    }
+  }); 
+ 
+}
+

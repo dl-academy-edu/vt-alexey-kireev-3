@@ -1,47 +1,31 @@
 .popup { 
     &__box {
+        max-width: 595px;
         display: flex;
         flex-wrap: wrap;
         justify-content: space-between;
     }
     &__form {
+       
         &_register { 
-        width: 680px;
+            max-width: 680px;
         }
     }
     &__lable {
-        cursor: pointer;
 
-        &_custom {
+        &_width {
             width: 48.5%;
             
         }
     }
-    &__input_sendMessage {
-        box-sizing: content-box;
-        border: 3px solid hsl(0, 0%, 90%);
-        min-height: 140px;
-        width: 100%;
-        max-width: 100%;
-        outline: none;
-        resize: none;
-        
-        &:focus {
-          border-color: #070707;
-        }
-    
-        &:hover {
-          border-color: #828282;
-        }
-      }
+
     &__container {
         display: flex;
-        align-items: center;
 
         &:hover .popup__checkboxText   {
             color: #828282;
         }
-        &:hover .popup__checkboxChecker  {
+        &:hover .popup__Checker  {
             border: 2px solid #828282;
         }
     }
@@ -53,32 +37,37 @@
 
         color: #E5E5E5;
         margin-left: 35px;
+
+        @media screen and (max-width: $sm) {
+            margin-left: 30px;
+          }
     }
     &__checkbox {
- 
+
         &:focus ~.popup__checkboxText   {
             color: #828282;
+            outline: 2px solid #000;
+            outline-offset: 2px;
         }
-        &:focus ~.popup__checkboxChecker  {
+        &:focus ~.popup__Checker  {
             border: 2px solid #828282;
         }
 
-       &:checked ~.popup__checkboxChecker::before {
+       &:checked ~.popup__Checker::before {
         content: "✔";
         font-weight: 800;
-        font-size: 17px;
+        font-size: 16px;
         position: absolute;
         display: inline-block;
         width: 19px;
         height: 19px;
-        top: -2px;
-        left: 2px;
+        transform: translate(2px, -1.5px)
        }
        &:checked ~.popup__checkboxText {
            color: #070707;
        }
     }
-     &__checkboxChecker {
+     &__Checker {
         position: absolute;
         display: block;
         border: 2px solid #E5E5E5;
@@ -89,5 +78,13 @@
         height: 19px;
       
         align-items: center;
+
+        left: 0;
+    margin-left: 42px;
+
+    
+    @media screen and (max-width: $sm) {
+        margin-left: 20px;
+      }
      }
 }

@@ -64,7 +64,7 @@
   transition-property: transform;
 
   @media screen and (max-width: 768px) {
-    padding-top: 93.7%;
+    padding-top: 93%;
   }
   @media screen and (max-width: 375px) {
     padding-top: 215.7%;
@@ -204,7 +204,7 @@
 }
 .swiper-button-prev:after,
 .swiper-container-rtl .swiper-button-next:after {
-  content: "prev";
+  content: url("static/images/arrow-left.svg");
 }
 .swiper-button-next,
 .swiper-container-rtl .swiper-button-prev {
@@ -213,7 +213,7 @@
 }
 .swiper-button-next:after,
 .swiper-container-rtl .swiper-button-prev:after {
-  content: "next";
+  content: url("static/images/arrow-right.svg");
 }
 .swiper-button-prev.swiper-button-white,
 .swiper-button-next.swiper-button-white {

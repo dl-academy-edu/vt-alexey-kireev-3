@@ -1,39 +1,47 @@
-
-
 const SERVER_URL = 'https://academy.directlinedev.com';
 const VERSION_API = '1.0.0';
 // Open close popup signIn js 
 
-const popUpFindSingIn = document.querySelector('.popupSignIn_js');
-const popupSignIn = document.querySelector('.popupSignInOpen_js');
-const popUpRegister = document.querySelector('.popupRegister_js');
-const popupRegisterOpen = document.querySelector('.popupRegisterOpen_js');
-const profileLink = document.querySelector('.profileLink_js');
+const SingInpopup = document.querySelector('.SignIn-popup_js');
+const mobileSingInpopup = document.querySelector('.mobile-SignIn-popup_js');
+const SignInpopup = document.querySelector('.SignInOpen-popup_js');
+const mobileSignInpopup = document.querySelector('.mobile-SignInOpen-popup_js');
+const registerpopup = document.querySelector('.Register-popup_js');
+const mobileregisterpopup = document.querySelector('.mobile-Register-popup_js');
+const RegisterOpenpopup = document.querySelector('.RegisterOpen-popup_js');
+const mobileRegisterOpenpopup = document.querySelector('.mobile-RegisterOpen-popup_js');
+const profile = document.querySelector('.profile_js');
+const mobileprofile = document.querySelector('.mobile-profile_js');
+const OutProfile = document.querySelector(".singout_js");
+const OutProfileMobile = document.querySelector(".mobile-singout_js");
+
 const registerForm = document.forms.register;
 const signIn = document.forms.signIn;
-const popupSendMessageOpen = document.querySelector('.popupSendMessageOpen_js');
-const sendMessageButton = document.querySelector('.sendMessageButton_js');
-const sendEmail = document.querySelector('.sendEmail_js');
-const sendMassageForm = document.querySelector('.sendMassageForm_js');
-const registerChecked = document.querySelector('.registerChecked_js');
+const MessageOpenpopup = document.querySelector('.MessageOpen-popup_js');
+const MessageButton = document.querySelector('.MessageButton_js');
+const Emailsend = document.querySelector('.Emailsend_js');
+const MassageForm = document.querySelector('.MassageForm_js');
+const registerCheck = document.querySelector('.registerCheck_js');
 const registerButton = document.querySelector('.registerButton_js');
-const sendButton = document.querySelector('.sendButton_js');
-const sendCheckbox = document.querySelector('.sendCheckbox_js');
+const Buttonsend = document.querySelector('.Buttonsend_js');
+const Checkboxsend = document.querySelector('.Checkboxsend_js');
 
+
+ 
 
 //open popup login
 (function () {
 
   let lastFocus;
 
-  popUpFindSingIn.addEventListener('click', function () {
+  SingInpopup.addEventListener('click', function () {
 
     lastFocus = document.activeElement;
-    popupSignIn.classList.add('popup_open');
-    popupSignIn.querySelector('.popup__input').focus();
+    SignInpopup.classList.add('popup_open');
+    SignInpopup.querySelector('.popup__input').focus();
 
 
-    let close = popupSignIn.querySelector('.popup__close');
+    let close = SignInpopup.querySelector('.popup__close');
     close.addEventListener('click', exit);
 
     window.addEventListener('keydown', keyDownEcs);
@@ -47,7 +55,40 @@ const sendCheckbox = document.querySelector('.sendCheckbox_js');
     function exit() {
       close.removeEventListener('click', exit);
       window.removeEventListener('keydown', keyDownEcs);
-      popupSignIn.classList.remove('popup_open');
+      SignInpopup.classList.remove('popup_open');
+      lastFocus.focus();
+    }
+  })
+})();
+
+//mobile open popup login
+
+(function () {
+
+  let lastFocus;
+
+  mobileSingInpopup.addEventListener('click', function () {
+
+    lastFocus = document.activeElement;
+    mobileSignInpopup.classList.add('popup_open');
+    mobileSignInpopup.querySelector('.popup__input').focus();
+
+
+    let close = mobileSignInpopup.querySelector('.popup__close');
+    close.addEventListener('click', exit);
+
+    window.addEventListener('keydown', keyDownEcs);
+
+    function keyDownEcs(event) {
+      if (event.code === 'Escape') {
+        exit();
+      }
+    }
+
+    function exit() {
+      close.removeEventListener('click', exit);
+      window.removeEventListener('keydown', keyDownEcs);
+      mobileSignInpopup.classList.remove('popup_open');
       lastFocus.focus();
     }
   })
@@ -60,14 +101,14 @@ const sendCheckbox = document.querySelector('.sendCheckbox_js');
 
   let lastFocus;
 
-  popUpRegister.addEventListener('click', function () {
+  mobileregisterpopup.addEventListener('click', function () {
 
     lastFocus = document.activeElement;
-    popupRegisterOpen.classList.add('popup_open');
-    popupRegisterOpen.querySelector('.popup__input').focus();
+    mobileRegisterOpenpopup.classList.add('popup_open');
+    mobileRegisterOpenpopup.querySelector('.popup__input').focus();
 
 
-    let close = popupRegisterOpen.querySelector('.popup__close');
+    let close = mobileRegisterOpenpopup.querySelector('.popup__close');
 
     close.addEventListener('click', exit);
 
@@ -83,63 +124,46 @@ const sendCheckbox = document.querySelector('.sendCheckbox_js');
     function exit() {
       close.removeEventListener('click', exit);
       window.removeEventListener('keydown', keyDownEcs);
-      popupRegisterOpen.classList.remove('popup_open');
+      mobileRegisterOpenpopup.classList.remove('popup_open');
       lastFocus.focus();
     }
   })
 })();
 
-//Register 
+// Mobile Open close popup Register
 (function () {
 
-  let removeArr = [];
-  let isLoadingRegister = false;
+  let lastFocus;
 
-  registerForm.addEventListener('submit', function (event) {
-    event.preventDefault();
-    if (isLoadingRegister) {
-      return
-    }
-    isLoadingRegister = true;
-    const data = getFormData(event.target);
-    let errors = validateData(data);
-    removeArr.forEach(fn => fn());
-    if (Object.keys(errors).length) {
-      removeArr = setFormError(registerForm, errors);
-      isLoadingRegister = false;
-      return
-    }
-    fetchData({
-      method: 'POST',
-      url: '/api/users',
-      body: JSON.stringify(data),
-      headers: {
-        'Content-Type': 'application/json'
+  registerpopup.addEventListener('click', function () {
+
+    lastFocus = document.activeElement;
+    RegisterOpenpopup.classList.add('popup_open');
+    RegisterOpenpopup.querySelector('.popup__input').focus();
+
+
+    let close = RegisterOpenpopup.querySelector('.popup__close');
+
+    close.addEventListener('click', exit);
+
+    window.addEventListener('keydown', keyDownEcs);
+
+
+    function keyDownEcs(event) {
+      if (event.code === 'Escape') {
+        exit();
       }
-    })
-      .then(res => {
-        return res.json();
-      })
-      .then(res => {
+    }
 
-        if (res.success) {
-          alert('Succsess registration');
-          popupRegisterOpen.classList.remove('popup_open');
-
-        } else {
-          throw res;
-        }
-        isLoadingRegister = false;
-      })
-      .catch(err => {
-        for (key in err.errors) {
-          setFormError(registerForm, err.errors);
-          isLoadingRegister = false;
-        }
-      })
+    function exit() {
+      close.removeEventListener('click', exit);
+      window.removeEventListener('keydown', keyDownEcs);
+      RegisterOpenpopup.classList.remove('popup_open');
+      lastFocus.focus();
+    }
   })
-
 })();
+
 
 //login 
 (function () {
@@ -176,7 +200,7 @@ const sendCheckbox = document.querySelector('.sendCheckbox_js');
           alert('Пользователь успешно вошел, ID:\n' + res.data.userId)
           updateToken(res.data);
           headerUpdate();
-          popupSignIn.classList.remove('popup_open');
+          SignInpopup.classList.remove('popup_open');
           isLoadingLogin = false;
         } else {
           throw res;
@@ -193,88 +217,84 @@ const sendCheckbox = document.querySelector('.sendCheckbox_js');
 })();
 
 headerUpdate();
+ 
 
-//send message
-(function () {
-  sendMassageForm.addEventListener('submit', function (e) {
-    sendMessage(e);
-  })
 
-})();
+//active page
 
-function sendMessage(event) {
-  event.preventDefault();
-  let isSending = false;
-  let removeArr = [];
+let pageId = document.querySelector("[data-id-page]").getAttribute("data-id-page"),
+  navItem = document.querySelector(`[data-id-nav=${pageId}]`);
 
-  if (isSending) {
-    return
-  }
-  isSending = false;
-  let data = getFormData(event.target);
-  let errors = validateSendMessage(data);
-  removeArr.forEach(fn => fn());
-  if (Object.keys(errors).length) {
-    removeArr = setFormError(event.target, errors);
-    isSending = false;
-    return
-  }
-  let items = {};
-  items.body = JSON.stringify(data);
-  items.to = '111@asdas.com'
-  fetch(SERVER_URL + '/api/emails', {
-    method: 'POST',
-    body: JSON.stringify(items),
-    headers: {
-      'Content-Type': 'application/json;charset=utf-8',
-    }
-
-  })
-    .then(res => res.json())
-    .then(res => {
-      if (res.success)
-        alert('Emeil was sending');
-      popupSendMessageOpen.classList.remove('popup_open');
-    }
-    )
-    .catch(() => {
-      console.error('Something was wrong. Try again');
-    })
+if(pageId == navItem.getAttribute("data-id-nav")) {
+  navItem.classList.add("header__link_active");
 }
 
-// Open popup send Message 
-(function () {
+//active page mobile
+
+let pageIdMobile = document.querySelector("[data-id-page]").getAttribute("data-id-page"),
+  navItemMobile = document.querySelector(`[m-data-id-nav=${pageIdMobile}]`);
+
+if(pageIdMobile == navItemMobile.getAttribute("m-data-id-nav")) {
+ navItemMobile.classList.add("mobile-header__link_active");
+}
 
 
-  let lastFocus;
 
-  sendMessageButton.addEventListener('click', function () {
+//mobile-menu
 
-    lastFocus = document.activeElement;
-    popupSendMessageOpen.classList.add('popup_open');
-    popupSendMessageOpen.querySelector('.popup__input').focus();
+var mobileHeader = document.querySelector(".mobile-header_js");
+var headerMobileButton = document.querySelector(".header__mobile-button_js");
+var mobileCloseButton = document.querySelector(".mobile-header__close-button_js");
+
+headerMobileButton.addEventListener("click", function () {
+    mobileHeader.classList.add("mobile-header_open");
+});
+
+mobileCloseButton.addEventListener("click", function () {
+    mobileHeader.classList.remove("mobile-header_open");
+});
+
+/* Sing out profile */
+
+let singOutProfile = document.querySelector(".singout_js");
+let singOutProfileMobile = document.querySelector(".mobile-singout_js");
+
+singOutProfile.addEventListener("click", function(){
+  localStorage.removeItem("token");
+  window.location.pathname = "/index.html";
+});
+
+singOutProfileMobile.addEventListener("click", function(){
+  localStorage.removeItem("token");
+  window.location.pathname = "/index.html";
+});
 
 
-    let close = popupSendMessageOpen.querySelector('.popup__close');
+//Кнопка наверх
+(function() {
+  function trackScroll() {
+    let scrolled = window.pageYOffset;
 
-    close.addEventListener('click', exit);
-
-    window.addEventListener('keydown', keyDownEcs);
-
-
-    function keyDownEcs(event) {
-      if (event.code === 'Escape') {
-        exit();
-      }
+    if (scrolled < 1500) {
+      goTopBtn.classList.add('scroll_hidden');
     }
-
-    function exit() {
-      close.removeEventListener('click', exit);
-      window.removeEventListener('keydown', keyDownEcs);
-      popupSendMessageOpen.classList.remove('popup_open');
-      lastFocus.focus();
+    if (scrolled > 1500) {
+      goTopBtn.classList.remove('scroll_hidden');
     }
-  })
+  }
+
+  function backToTop() {
+    let scrollStep = window.pageYOffset / 50;
+    if (window.pageYOffset > 0) {
+      window.scrollBy(0, -(scrollStep));
+      setTimeout(backToTop, 0);
+    }
+  }
+
+  let goTopBtn = document.querySelector('.scroll_js');
+
+  window.addEventListener('scroll', trackScroll);
+  goTopBtn.addEventListener('click', backToTop);
 })();
 
 
@@ -384,7 +404,6 @@ function getFormData(form, data = {}, type = 'json') {
   } else {
     return new FormData(form);
   }
-
 }
 
 function setInvalid(input) {
@@ -448,19 +467,27 @@ function updateToken(response) {
   localStorage.setItem('userId', response.userId);
 }
 
-
 function headerUpdate() {
   if (localStorage.getItem('token')) {
-    popUpFindSingIn.classList.add('hidden');
-    popUpRegister.classList.add('hidden');
-    profileLink.classList.remove('hidden');
+    SingInpopup.classList.add('hidden');
+    mobileSingInpopup.classList.add('hidden');
+    registerpopup.classList.add('hidden');
+    mobileregisterpopup.classList.add('hidden');
+    profile.classList.remove('hidden');
+    mobileprofile.classList.remove('hidden');
+    OutProfile.classList.remove("hidden");
+    OutProfileMobile.classList.remove("hidden");
   } else {
-    popUpFindSingIn.classList.remove('hidden');
-    popUpRegister.classList.remove('hidden');
-    profileLink.classList.add('hidden');
+    SingInpopup.classList.remove('hidden');
+    mobileSingInpopup.classList.remove('hidden');
+    registerpopup.classList.remove('hidden');
+    mobileregisterpopup.classList.remove('hidden');
+    profile.classList.add('hidden');
+    mobileprofile.classList.add('hidden');
+    OutProfile.classList.add("hidden");
+    OutProfileMobile.classList.add("hidden");
   }
 }
-
 
 function setValueToForm(form, data) {
   let inputs = form.querySelectorAll('input');
@@ -491,7 +518,6 @@ function setValueToForm(form, data) {
   return data;
 }
 
-
 function isDisabled(elem, button) {
   if (elem.checked) {
     button.removeAttribute('disabled');
@@ -505,19 +531,271 @@ function isDisabled(elem, button) {
 
 (function () {
 
-  registerChecked.addEventListener('click', function () {
-    isDisabled(registerChecked, registerButton);
+  registerCheck.addEventListener('click', function () {
+    isDisabled(registerCheck, registerButton);
   })
 
 })();
 
 (function () {
 
-  sendCheckbox.addEventListener('click', function () {
-    isDisabled(sendCheckbox, sendButton);
+  Checkboxsend.addEventListener('click', function () {
+    isDisabled(Checkboxsend, Buttonsend);
   })
 
 })();
 
+ // Open popup send Message 
+(function () {
+
+  let lastFocus;
+
+  MessageButton.addEventListener('click', function () {
+
+    lastFocus = document.activeElement;
+    MessageOpenpopup.classList.add('popup_open');
+    MessageOpenpopup.querySelector('.popup__input').focus();
 
 
+    let close = MessageOpenpopup.querySelector('.popup__close');
+
+    close.addEventListener('click', exit);
+
+    window.addEventListener('keydown', keyDownEcs);
+
+
+    function keyDownEcs(event) {
+      if (event.code === 'Escape') {
+        exit();
+      }
+    }
+
+    function exit() {
+      close.removeEventListener('click', exit);
+      window.removeEventListener('keydown', keyDownEcs);
+      MessageOpenpopup.classList.remove('popup_open');
+      lastFocus.focus();
+    }
+  })
+})();
+
+//slider
+
+function slider(selectorStr) {
+  const selector = document.querySelector(selectorStr);
+  const wrapper = selector.querySelector(".slider__wrapper");
+  const innerWrapper = selector.querySelector(".slider__inner-wrapper");
+  const pagination = selector.querySelector(".slider__pagination");
+  const buttonBack = selector.querySelector(".slider__button_back");
+  const buttonNext = selector.querySelector(".slider__button_next");
+  const slides = selector.querySelectorAll(".slider_slide");
+
+  let slideWidth = 0;
+
+  let maxSlideIndex = innerWrapper.childElementCount - 1;
+  let timerId = null;
+
+  let activeSlide = +localStorage.getItem('activeSlide') || 0;
+  let dots = [];
+  initDots();
+  setButtonState(buttonBack);
+
+  function initSlideWidth() {
+      slideWidth = wrapper.offsetWidth;
+      for (let slide of slides) {
+          slide.style.width = `${slideWidth}px`;
+      }
+  }
+  initSlideWidth();
+
+  function setButtonState(button, state = false) {
+      if (state) {
+          button.removeAttribute('disabled');
+      } else {
+          button.setAttribute('disabled', '');
+      }
+  }
+
+  function setActiveSlide(index, withAnimation = true) {
+      if (index < 0 || index > maxSlideIndex) {
+          return;
+      }
+      clearTimeout(timerId);
+      if (withAnimation) {
+          innerWrapper.style.transition = 'transform 500ms';
+          timerId = setTimeout(() => {
+              innerWrapper.style.transition = '';
+          }, 500);
+      }
+      setButtonState(buttonNext, true);
+      setButtonState(buttonBack, true);
+      index === 0 && setButtonState(buttonBack);
+      index === maxSlideIndex && setButtonState(buttonNext);
+      innerWrapper.style.transform = `translateX(${index * slideWidth * (-1)}px)`;
+      dots[activeSlide].classList.remove('slider__dot_active');
+      activeSlide = index;
+      dots[activeSlide].classList.add('slider__dot_active');
+      localStorage.setItem('activeSlide', activeSlide);
+  }
+
+  buttonNext.addEventListener('click', function () {
+      setActiveSlide(activeSlide + 1);
+  });
+
+  buttonBack.addEventListener('click', function () {
+      setActiveSlide(activeSlide - 1);
+  });
+
+  window.addEventListener('resize', function () {
+      initSlideWidth();
+      setActiveSlide(activeSlide, false);
+  });
+
+  let isTouch = false;
+  let startX = 0;
+  let endX = 0;
+  wrapper.addEventListener('touchstart', function (e) {
+      if (isTouch) return;
+      isTouch = true;
+      startX = e.touches[0].pageX;
+  });
+
+  wrapper.addEventListener('touchmove', function (e) {
+      if (!isTouch) return;
+      endX = e.touches[0].pageX;
+  });
+
+  wrapper.addEventListener('touchend', function (e) {
+      if (!isTouch) return;
+      isTouch = false;
+      if (Math.abs(startX - endX) < 50) {
+          return;
+      }
+      if (startX - endX < 0) {
+          setActiveSlide(activeSlide - 1);
+      }
+
+      if (startX - endX > 0) {
+          setActiveSlide(activeSlide + 1);
+      }
+  });
+
+  function initDots() {
+      for (let i = 0; i < maxSlideIndex + 1; i++) {
+          let dot = document.createElement('button');
+          dot.classList.add('slider__dot');
+          if (i === activeSlide) {
+              dot.classList.add('slider__dot_active');
+          }
+          dots.push(dot);
+          dot.addEventListener('click', function () {
+              setActiveSlide(i);
+          })
+          pagination.insertAdjacentElement('beforeend', dot);
+      }
+  }
+
+  setActiveSlide(activeSlide, false);
+
+  return {
+      setActiveSlide,
+      next: () => setActiveSlide(activeSlide + 1),
+      prev: () => setActiveSlide(activeSlide - 1),
+  }
+}
+
+const mySlider = slider('.slider');
+
+
+
+// swiper
+
+const swiper = new Swiper('.swiper-container', {
+  direction: 'horizontal',
+  loop: true,
+
+  navigation: {
+      color: '#000',
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+  },
+});
+
+// rating
+
+const ratings = {
+  html: 85 ,
+  css: 55,
+  js: 5,
+  git: 15,
+  figma: 80,
+}
+
+const starsTotal = 100;
+document.addEventListener('DOMContentLoaded', getRatings);
+
+function getRatings() {
+  for (let rating in ratings) {
+
+    const starPercentage = (ratings[rating] / starsTotal) * 100;
+
+    const starPercentageRounded = `${Math.round(starPercentage / 1) * 1}%`;
+
+    document.querySelector(`.${rating} .skills__level-inner` ).style.width = starPercentageRounded;
+
+    document.querySelector(`.${rating} .skills__value`)  .innerHTML = ratings[rating];
+  }
+};
+
+
+  
+
+//send message
+(function () {
+  MassageForm.addEventListener('submit', function (e) {
+    sendMessage(e);
+  })
+
+})();
+
+function sendMessage(event) {
+  event.preventDefault();
+  let isSending = false;
+  let removeArr = [];
+
+  if (isSending) {
+    return
+  }
+  isSending = false;
+  let data = getFormData(event.target);
+  let errors = validateSendMessage(data);
+  removeArr.forEach(fn => fn());
+  if (Object.keys(errors).length) {
+    removeArr = setFormError(event.target, errors);
+    isSending = false;
+    return
+  }
+  let items = {};
+  items.body = JSON.stringify(data);
+  items.to = '111@asdas.com'
+  fetch(SERVER_URL + '/api/emails', {
+    method: 'POST',
+    body: JSON.stringify(items),
+    headers: {
+      'Content-Type': 'application/json;charset=utf-8',
+    }
+
+  })
+    .then(res => res.json())
+    .then(res => {
+      if (res.success)
+        alert('Emeil was sending');
+        MessageOpenpopup.classList.remove('popup_open');
+    }
+    )
+    .catch(() => {
+      console.error('Something was wrong. Try again');
+    })
+}
+
+ 

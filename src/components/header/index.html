@@ -1,21 +1,24 @@
 <header class="header container">
   <div class="header__box">
-    <a class="header__link header__link_active" href="/" aria-label="Go to Home" title="Home">
+    <a class="header__link" href="/" aria-label="Go to Home" title="Home" data-id-nav="home">
       Home
     </a>
     <nav>
     <ul class="header__inner">
       <li class="header__item">
-        <a class="header__link" href="/pages/blog" aria-label="Go to blog" title="My blog">My blog</a>
+        <a class="header__link" href="/pages/blog" aria-label="Go to blog" title="My blog" data-id-nav="blog">My blog</a>
       </li>
-      <li class="header__item">
-        <button type="button" class="header__link popupSignIn_js" aria-label="Go to sign in" title="Sign in">Sign in</button>
+      <li class="header__item SignIn-popup_js">
+        <button type="button" class="header__link" aria-label="Go to sign in" title="Sign in">Sign in</button>
       </li>
-      <li class="header__item">
-        <button type="button" class="header__link popupRegister_js" aria-label="Go to register" title="Register">Register</button>
+      <li class="header__item Register-popup_js">
+        <button type="button" class="header__link" aria-label="Go to register" title="Register">Register</button>
       </li>
-      <li class="header__item">
-        <a href="/pages/profile" class="header__link header__link_active profileLink_js" aria-label="Go to profile" title="Profile">To profile</a>
+      <li class="header__item profile_js">
+        <a href="/pages/profile" class="header__link" aria-label="Go to profile" title="Profile" data-id-nav="profile">To profile</a>
+      </li>
+      <li class="header__item singout_js">
+        <button class="header__link">Sign out</button>
       </li>
     </ul>
   </nav>
@@ -26,19 +29,22 @@
             <nav aria-label="Навигация по сайту" class="mobile-header__nav">
                 <ul class="mobile-header__list">
                     <li class="mobile-header__item">
-                        <a href="#" class="mobile-header__link mobile-header__link_active">Home</a>
+                        <a href="/" class="mobile-header__link" m-data-id-nav="home">Home</a>
                     </li>
                     <li class="mobile-header__item">
-                        <a href="/pages/blog" class="mobile-header__link">My blog</a>
+                        <a href="/pages/blog" class="mobile-header__link" m-data-id-nav="blog">My blog</a>
                     </li>
-                    <li class="mobile-header__item">
-                      <button type="button" class="mobile-header__link popupSignIn2_js">Sign in</button>
+                    <li class="mobile-header__item mobile-SignIn-popup_js">
+                      <button type="button" class="mobile-header__link">Sign in</button>
                     </li>
-                    <li class="mobile-header__item">
-                      <button type="button" class="mobile-header__link popupRegister2_js">Register</button>
+                    <li class="mobile-header__item mobile-Register-popup_js">
+                      <button type="button" class="mobile-header__link">Register</button>
                     </li>
-                    <li class="mobile-header__item">
-                      <a href="/pages/profile" class="mobile-header__link profileLink_js">To profile</a>
+                    <li class="mobile-header__item mobile-profile_js">
+                      <a href="/pages/profile" class="mobile-header__link" m-data-id-nav="profile">To profile</a>
+                    </li>
+                    <li class="mobile-header__item mobile-singout_js">
+                      <button class="mobile-header__link">Sign out</button>
                     </li>
                 </ul>
             </nav>
@@ -52,6 +58,7 @@
         
     </button>
 </div>
-@@include('signInPopup/index.html')
-@@include('registerPopup/index.html')
-</header>
+@@include('signIn/index.html')
+@@include('register/index.html')
+</header> 
+ 

@@ -13,21 +13,22 @@
   <meta name="description" content="My Profile" />
 </head>
 
-<body>
+<body data-id-page="profile">
   @@include('header/index.html')
   <main>
     <section class="profile container">
       <div class="profile__inner-title">
         <h1 class="profile__title">My profile</h1>
-        <button class="header__mobile-button header__mobile-button_profile header__mobile-button_js">
+        <button class="header__mobile-button header__mobile-button_profile header__mobile-button_js" type="button">
           <span class="header__mobile-icon"></span>
           <span class="header__mobile-icon"></span>
           <span class="header__mobile-icon"></span>
         </button>
       </div>
       <div class="profile__wrapper">
-        <div class="profile__inner-photo photo_js">
-        </div>
+        <div class="profile__inner-avatar">
+        <div class="profile__avatar photo_js"></div>
+      </div>
         <div class="profile__inner-info">
           <ul class="profile__list">
             <li class="profile__item">
@@ -64,11 +65,11 @@
         </div>
       </div>
     </section>
-    @@include('changeProfile/index.html')
-    @@include('changePassword/index.html')
+    @@include('Profile/index.html')
+    @@include('Password/index.html')
 
   </main>
-  <script src="/static/images/js/common.js"></script>
+ 
   <script src="/static/images/js/script.js"></script>
   <script src="/static/images/js/profile.js"></script>
 

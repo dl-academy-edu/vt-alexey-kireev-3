@@ -27,7 +27,7 @@ h6,
 p {
   margin-top: 0;
   margin-bottom: 0;
-  font-family: "Open Sans", sans-serif;
+  font-family: "Gilroy", Arial, sans-serif;
 }
 
 .container {
@@ -64,16 +64,22 @@ img {
   height: auto;
 }
 
-.js-focus-visible :focus:not(.focus-visible) {
-  outline: none;
-}
-
 .hidden {
-  display: none;
+  position: absolute;
+  display: block;
+  width: 0;
+  height: 0;
+  left: -9999px;
+
+  visibility: hidden;
+
+  &_focus {
+    visibility: initial;
+  }
 }
 
 .loader {
-  margin: 60px auto;
+  margin: 0px auto;
   transform: translate(-50%, -50%);
 
   border: 16px solid #f3f3f3;
@@ -93,7 +99,7 @@ img {
   }
 }
 
-.button-scroll {
+.scroll {
   position: fixed;
 
   bottom: 30px;
@@ -154,6 +160,7 @@ img {
 
     @media screen and (max-width: $sm) {
       border: none;
+      padding: 40px 20px 50px 20px;
     }
   }
   &__lable {
@@ -175,7 +182,15 @@ img {
     height: 50px;
     width: 100%;
     padding-left: 10px;
-    outline: none;
+
+    &_bad {
+      border-color: red;
+    }
+
+    &_good {
+      border-color: green;
+    }
+
 
     &:focus {
       border-color: #070707;
@@ -198,10 +213,48 @@ img {
     background-color: transparent;
     border: none;
 
+    @media screen and (max-width: 768px) {
+      top: -40px;
+      right: -10px;
+
+    }
     @media screen and (max-width: $sm) {
       top: 0px;
       right: 0;
-      left: 30px;
+      left: 12px;
+    }
+    &_login, &_password {
+      top: -3px;
+      right: -46px;
+      left: initial;
+
+      @media screen and (max-width: $sm) {
+        top: 0px;
+        right: 0;
+        left: 12px;
+      }
+    }
+
+    &_message-bad {
+      top: 46%;
+      right: 26%;
+
+      @media screen and (max-width: $sm) {
+        top: 20px;
+        right: 0;
+        left: 10px;
+      }
+    }
+
+    &_message-good {
+      top: 47%;
+      right: 37%;
+
+      @media screen and (max-width: $sm) {
+        top: 20px;
+        right: 0;
+        left: 10px;
+      }
     }
 
     &:hover svg rect,
@@ -211,11 +264,31 @@ img {
   }
 }
 
+.requiared::after {
+  content: "*";
+  color: red;
+  margin-left: 3px;
+}
+
+.invalidInput {
+  border-color: #EB3617;
+}
+
+.invalidMessage {
+  margin-top: 10px;
+  font-size: 14px;
+  line-height: 16px;
+
+  color: #EB3617;
+}
+
+
 // Подключение компонентов
 @import "./header/header";
 @import "./footer/footer";
 @import "./button/button";
-@import "./signInPopup/singinPopup";
-@import "./registerPopup/registerPopup";
-@import "./sendMessage/sendMassage";
-
+@import "./signIn/singin";
+@import "./register/register";
+@import "./Message/Massage";
+@import "./goodMessage/goodMessage";
+@import "./badMessage/badMessage";

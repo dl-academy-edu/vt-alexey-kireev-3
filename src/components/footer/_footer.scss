@@ -43,11 +43,12 @@
 }
 
 &__message {
-    height: 42px;
+        height: 43px;
+        width: 180px;
 }
 
 &__social {
-    margin: 42px 44px 27px 34px;
+    margin: 40px 44px 27px 34px;
     max-width: 400px;
     display: flex;
     flex-wrap: wrap;

@@ -80,7 +80,7 @@ color: #828282;
 cursor: pointer;
 border: none;
 background: transparent;
-
+padding: 0;
 &_active {
   color: black;
 }
@@ -95,8 +95,8 @@ background: transparent;
 }
 
 &__item {
-  margin-left: 15px;
-  margin-right: -5px;
+    margin-left: 22px;
+    margin-right: -1px;
 }
 
 
@@ -148,6 +148,7 @@ background: transparent;
 
 &__list {
   text-align: right;
+  overflow: hidden;
 }
   &__item {
     margin-bottom: 20px;
@@ -191,5 +192,3 @@ color: #828282;
 
 }
 }
-
-
