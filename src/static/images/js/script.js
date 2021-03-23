@@ -300,10 +300,11 @@ singOutProfileMobile.addEventListener("click", function(){
 
 //Validation
 
+
 function validateData(data, errors = {}) {
 
   if (!checkEmail(data.email)) {
-    errors.email = 'Please enter a valid email address (your entry is not in the format "somebody@example.com")';
+    errors.email = 'Please enter a valid email address';
   }
   if (data.password != data.repeatPassword) {
     errors.password = 'The password and confirm password fields do not match.';
@@ -431,6 +432,14 @@ function giveInputFeedback(input, error) {
   return handl;
 }
 
+function setValidInput(input) {
+  input.classList.add("popup__input_good");
+  input.addEventListener("input", function handlerInput(event) {
+    input.classList.remove("popup__input_good");
+    input.removeEventListener("input", handlerInput);
+  })
+}
+
 function setFormError(form, errors) {
   let removeArr = [];
   let inputs = form.querySelectorAll('input');
@@ -453,6 +462,7 @@ function setFormError(form, errors) {
   }
   return removeArr;
 }
+
 
 function fetchData({ method = 'GET', url = '', body = null, headers = {} }) {
   return fetch(SERVER_URL + url, {
