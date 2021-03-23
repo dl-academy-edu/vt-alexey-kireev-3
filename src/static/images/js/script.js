@@ -432,14 +432,6 @@ function giveInputFeedback(input, error) {
   return handl;
 }
 
-function setValidInput(input) {
-  input.classList.add("popup__input_good");
-  input.addEventListener("input", function handlerInput(event) {
-    input.classList.remove("popup__input_good");
-    input.removeEventListener("input", handlerInput);
-  })
-}
-
 function setFormError(form, errors) {
   let removeArr = [];
   let inputs = form.querySelectorAll('input');
