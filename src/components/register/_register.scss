@@ -6,16 +6,13 @@
         justify-content: space-between;
     }
     &__form {
-       
         &_register { 
             max-width: 680px;
         }
     }
     &__lable {
-
         &_width {
             width: 48.5%;
-            
         }
     }
 
@@ -30,7 +27,6 @@
         }
     }
     &__checkboxText {
-
         font-weight: 500;
         font-size: 14px;
         line-height: 16px;
@@ -43,7 +39,6 @@
           }
     }
     &__checkbox {
-
         &:focus ~.popup__checkboxText   {
             color: #828282;
             outline: 2px solid #000;

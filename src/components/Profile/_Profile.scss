@@ -34,17 +34,17 @@
         position: absolute;
         top: 0px;
         left: 0;
+
         margin-top: 22px;
+        padding: 13px 11px 13px 14px;
+
         font-weight: 400;
         font-size: 18px;
         line-height: 21px;
-        padding: 13px 11px 13px 14px;
+
         width: 100.5%;
         height: 51px;
-        overflow: hidden;
-        white-space: nowrap;
-        word-wrap: normal;
-        text-overflow: ellipsis;
+
         background-color: #fff;
         border: 2px solid #e5e5e5;
         transition: border-color .4s;

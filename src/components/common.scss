@@ -236,8 +236,9 @@ img {
     }
 
     &_message-bad {
-      top: 46%;
-      right: 26%;
+    
+        top: 39%;
+        right: 35%;
 
       @media screen and (max-width: $sm) {
         top: 20px;

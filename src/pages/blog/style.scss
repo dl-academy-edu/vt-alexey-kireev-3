@@ -581,7 +581,7 @@
       display: block;
     }
   }
-  &__tagBox {
+  &__taglist {
     display: flex;
     margin-bottom: -7px;
   }
@@ -595,11 +595,11 @@
     height: 10px;
     border-radius: 5px;
   }
-  &__infoBox {
+  &__inner-info {
     display: flex;
     margin-bottom: 15px;
   }
-  &__infoElem {
+  &__infoitem {
     margin-right: 10px;
   }
   &__infoText {

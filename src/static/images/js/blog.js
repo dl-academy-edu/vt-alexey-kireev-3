@@ -151,7 +151,8 @@ function getTags() {
     let xhr = new XMLHttpRequest();
     const box = document.querySelector('.tagBox_js');
 
-    xhr.open('GET', `${SERVER_URL}/api/tags`);    box.innerHTML = preloaderCreater();      
+    xhr.open('GET', `${SERVER_URL}/api/tags`);    
+    box.innerHTML = preloaderCreater();      
     xhr.send();
     
     xhr.onload = function () {
@@ -236,10 +237,6 @@ function skipPost(page, limits) {
 
 }
 
-function preloaderCreater() {
-    return `<div class="loader"></div>`;
-}
-
 
 function postCreater(post) {
     return `<div class="card__box">
@@ -251,18 +248,18 @@ function postCreater(post) {
 <img src="${SERVER_URL}${post.photo.desktopPhotoUrl}" width="320" height="236" alt="${post.title}"/>
 </picture>
 </div>
-    <div class="card__textBox">
-        <ul class="card__tagBox postTagBox_js">
+    <div class="card__inner-box">
+        <ul class="card__taglist Tag_js">
             ${makeTagsPost(post)}
         </ul>
-        <ul class="card__infoBox">
-            <li class="card__infoElem">
+        <ul class="card__inner-info">
+            <li class="card__infoitem">
                 <span class="card__infoText">${getDate(post.date)}</span>
             </li>
-            <li class="card__infoElem">
+            <li class="card__infoitem">
                 <span class="card__infoText">${post.views} views</span>
             </li>
-            <li class="card__infoElem">
+            <li class="card__infoitem">
                 <span class="card__infoText">${post.commentsCount} comments</span>
             </li>
         </ul>

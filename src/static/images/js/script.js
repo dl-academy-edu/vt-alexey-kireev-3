@@ -18,14 +18,24 @@ const OutProfileMobile = document.querySelector(".mobile-singout_js");
 const registerForm = document.forms.register;
 const signIn = document.forms.signIn;
 const MessageOpenpopup = document.querySelector('.MessageOpen-popup_js');
+const Messagegoodpopup = document.querySelector('.Messagegood-popup_js');
+const Messagebadpopup = document.querySelector('.Messagebad-popup_js');
 const MessageButton = document.querySelector('.MessageButton_js');
 const Emailsend = document.querySelector('.Emailsend_js');
 const MassageForm = document.querySelector('.MassageForm_js');
+const Massagegood = document.querySelector('.goodmessage_js');
+const Massagebad = document.querySelector('.badmessage_js');
 const registerCheck = document.querySelector('.registerCheck_js');
 const registerButton = document.querySelector('.registerButton_js');
 const Buttonsend = document.querySelector('.Buttonsend_js');
 const Checkboxsend = document.querySelector('.Checkboxsend_js');
 
+
+ // loader
+
+ function preloaderCreater() {
+  return `<div class="loader"></div>`;
+}
 
  
 
@@ -164,27 +174,84 @@ const Checkboxsend = document.querySelector('.Checkboxsend_js');
   })
 })();
 
+//Register 
+(function(){
+  
+  let removeArr = [];
+  let isLoadingRegister = false;
 
+  registerForm.addEventListener('submit', function (event) {
+    event.preventDefault();
+    if (isLoadingRegister) {
+      return
+    }
+    isLoadingRegister = true;
+    const data = getFormData(event.target);
+    let errors = validateData(data);
+    removeArr.forEach(fn => fn());
+    if(Object.keys(errors).length) {
+      removeArr = setFormError (registerForm, errors);
+      isLoadingRegister = false;
+      return
+    }
+
+    fetchData({
+      method : 'POST',
+      url : '/api/users',
+      body: JSON.stringify(data),
+      headers:{
+        'Content-Type':'application/json'
+      }
+    })
+    .then (res=>{
+        return res.json();
+    })
+    .then (res=>{
+    
+      if (res.success) {
+        alert('Succsess registration');
+        popupRegisterOpen.classList.remove('popup_open');
+
+      } else{
+        throw res;
+      }
+      isLoadingRegister = false;
+    })
+    .catch(err => {
+      for (key in err.errors) {
+        setFormError(registerForm, err.errors);
+        isLoadingRegister = false;
+      }
+    })
+  })
+
+})();
 //login 
+ 
 (function () {
 
   let isLoadingLogin = false;
   let removeArr = [];
-
+ 
   signIn.addEventListener('submit', function logIn(e) {
-    e.preventDefault();
+    e.preventDefault();        
     if (isLoadingLogin) {
-      return
-    }
-    isLoadingLogin = true;
+      return    
+       
+    }      
+    isLoadingLogin = true; 
+ 
     const data = getFormData(signIn);
     let errors = validateDataLogin(data);
-    removeArr.forEach(fn => fn());
+    removeArr.forEach(fn => fn());    
     if (Object.keys(errors).length) {
       removeArr = setFormError(signIn, errors);
-      isLoadingRegister = false;
-      return
+      isLoadingRegister = false;  
+      return   
     }
+
+     
+    signIn.innerHTML = preloaderCreater();  
     fetchData({
       method: 'POST',
       url: '/api/users/login',
@@ -192,18 +259,17 @@ const Checkboxsend = document.querySelector('.Checkboxsend_js');
       headers: {
         'Content-Type': 'application/json'
       }
-
-    })
+    })  
       .then(res => res.json())
-      .then(res => {
-        if (res.success) {
+      .then(res => {   
+        if (res.success) {     
           alert('Пользователь успешно вошел, ID:\n' + res.data.userId)
           updateToken(res.data);
-          headerUpdate();
+          headerUpdate();     
           SignInpopup.classList.remove('popup_open');
-          isLoadingLogin = false;
+          isLoadingLogin = false; 
         } else {
-          throw res;
+          throw res; 
         }
       })
       .catch(err => {
@@ -213,7 +279,6 @@ const Checkboxsend = document.querySelector('.Checkboxsend_js');
         }
       })
   })
-
 })();
 
 headerUpdate();
@@ -300,22 +365,21 @@ singOutProfileMobile.addEventListener("click", function(){
 
 //Validation
 
+function validateData (data, errors={}) {
 
-function validateData(data, errors = {}) {
-
-  if (!checkEmail(data.email)) {
-    errors.email = 'Please enter a valid email address';
+  if(!checkEmail(data.email)){
+    errors.email = 'Please enter a valid email address (your entry is not in the format "somebody@example.com")';
   }
-  if (data.password != data.repeatPassword) {
+  if(data.password!=data.repeatPassword){
     errors.password = 'The password and confirm password fields do not match.';
   }
   if (!data.password) {
     errors.password = 'This field is required';
 
-  } else if (data.password.length < 8) {
+  } else if (data.password.length<8){
     errors.password = 'The password is too short';
   }
-
+  
   if (!data.name) {
     errors.name = 'This field is required';
   }
@@ -325,25 +389,25 @@ function validateData(data, errors = {}) {
   if (!data.location) {
     errors.location = 'This field is required';
   }
-  if (+(data.age) <= 0) {
+  if (+(data.age)<=0) {
     errors.age = 'Age is incorrect';
   }
   return errors;
 }
 
-function validateDataLogin(data, errors = {}) {
+function validateDataLogin (data, errors={}) {
 
-  if (!checkEmail(data.email)) {
+  if(!checkEmail(data.email)){
     errors.email = 'Please enter a valid email address (your entry is not in the format "somebody@example.com")';
   }
-
+ 
   if (!data.password) {
     errors.password = 'This field is required';
 
-  } else if (data.password.length < 8) {
+  } else if (data.password.length<8){
     errors.password = 'The password is too short';
   }
-
+  
   return errors;
 }
 
@@ -351,16 +415,16 @@ function checkEmail(email) {
   return email.match(/^[0-9a-z-\.]+\@[0-9a-z-]{2,}\.[a-z]{2,}$/i);
 }
 
-function validateSendMessage(data, errors = {}) {
+function validateSendMessage (data, errors={}) {
 
-  if (!checkEmail(data.email)) {
+  if(!checkEmail(data.email)){
     errors.email = 'Please enter a valid email address (your entry is not in the format "somebody@example.com")';
   }
-
+ 
   if (!data.phone) {
     errors.phone = 'This field is required';
 
-  }
+  }  
   if (!data.name) {
     errors.name = 'This field is required';
   }
@@ -370,83 +434,87 @@ function validateSendMessage(data, errors = {}) {
   return errors;
 }
 
-function getFormData(form, data = {}, type = 'json') {
-  if (type === 'json') {
-    let inputs = form.querySelectorAll('input');
+function getFormData(form, data = {}, type ='json'){
+  if (type === 'json'){
+    let inputs = form.querySelectorAll ('input');
     for (let input of inputs) {
-      switch (input.type) {
-        case 'radio':
-          if (input.checked) {
+        switch (input.type) {
+          case 'radio':
+            if(input.checked) {
+              data[input.name] = input.value;
+            }
+            break;
+            case 'checkbox':
+            if(!data[input.name]) {
+              data[input.name] = [];
+            }
+            if (input.checked){
+              data[input.name].push(input.value);
+            }
+            break;
+          case 'file':
+              data[input.name] = input.files;
+              break;
+            
+          default:
             data[input.name] = input.value;
-          }
-          break;
-        case 'checkbox':
-          if (!data[input.name]) {
-            data[input.name] = [];
-          }
-          if (input.checked) {
-            data[input.name].push(input.value);
-          }
-          break;
-        case 'file':
-          data[input.name] = input.files;
-          break;
-
-        default:
-          data[input.name] = input.value;
-          break;
-      }
+            break;
+        }
     }
-    let textareas = form.querySelectorAll('textarea');
+  let textareas = form.querySelectorAll('textarea');
     for (let textarea of textareas) {
       data[textarea.name] = textarea.value;
     }
-    return data;
+  return data;
   } else {
     return new FormData(form);
   }
+ 
 }
 
+
+
+
 function setInvalid(input) {
-  function handl() {
+  function handl (){
     input.removeEventListener('input', handl);
-    input.classList.remove("invalidInput");
+    input.classList.remove ("invalidInput");
   }
-  input.classList.add("invalidInput");
+  input.classList.add ("invalidInput");
   input.addEventListener('input', handl);
   return handl;
 }
 function giveInputFeedback(input, error) {
-  function handl() {
+  function handl (){
     message.remove();
     input.removeEventListener('input', handl);
   }
 
-  input.classList.add("invalidInput");
+  input.classList.add ("invalidInput");
   let message = document.createElement('div');
-  message.classList.add("invalidMessage");
+  message.classList.add ("invalidMessage");
   message.innerText = error;
-  input.insertAdjacentElement("afterend", message);
+  input.insertAdjacentElement("afterend",message);
 
   input.addEventListener('input', handl);
   return handl;
 }
 
-function setFormError(form, errors) {
+function setFormError (form, errors) {
   let removeArr = [];
-  let inputs = form.querySelectorAll('input');
+  let inputs = form.querySelectorAll ('input');
   let textareas = form.querySelectorAll('textarea');
 
   for (let input of inputs) {
-    if (errors[input.name]) {
+    if(errors[input.name]){
       const remove1 = setInvalid(input);
       const remove2 = giveInputFeedback(input, errors[input.name]);
       removeArr.push(remove1, remove2);
     }
   }
 
-  for (let textarea of textareas) {
-    if (errors[textarea.name]) {
+  for (let textarea of textareas) { 
+    if(errors[textarea.name]) {
       const remove3 = setInvalid(textarea);
       const remove4 = giveInputFeedback(input, errors[textarea.name]);
       removeArr.push(remove3, remove4);
@@ -455,10 +523,9 @@ function setFormError(form, errors) {
   return removeArr;
 }
 
-
-function fetchData({ method = 'GET', url = '', body = null, headers = {} }) {
+function fetchData ({method= 'GET', url = '',body = null, headers = {} }){
   return fetch(SERVER_URL + url, {
-    method: method,
+    method:method,
     body: body,
     headers: headers,
   })
@@ -793,11 +860,75 @@ function sendMessage(event) {
       if (res.success)
         alert('Emeil was sending');
         MessageOpenpopup.classList.remove('popup_open');
+        Massagegood.classList.add('popup_open');
+
     }
     )
     .catch(() => {
       console.error('Something was wrong. Try again');
+      MessageOpenpopup.classList.remove('popup_open');
+      Massagebad.classList.add('popup_open');
     })
 }
+  // Open popup Message good
+(function () {
 
- 
+  let lastFocus;
+
+  MessageButton.addEventListener('click', function () {
+
+    lastFocus = document.activeElement;
+
+    let close = Massagegood.querySelector('.popup__close');
+
+    close.addEventListener('click', exit);
+
+    window.addEventListener('keydown', keyDownEcs);
+
+
+    function keyDownEcs(event) {
+      if (event.code === 'Escape') {
+        exit();
+      }
+    }
+
+    function exit() {
+      close.removeEventListener('click', exit);
+      window.removeEventListener('keydown', keyDownEcs);
+      Massagegood.classList.remove('popup_open');
+      lastFocus.focus();
+    }
+  })
+})();
+
+
+// Open popup Message bad
+(function () {
+
+  let lastFocus;
+
+  MessageButton.addEventListener('click', function () {
+
+    lastFocus = document.activeElement;
+
+    let close = Massagebad.querySelector('.popup__close');
+
+    close.addEventListener('click', exit);
+
+    window.addEventListener('keydown', keyDownEcs);
+
+
+    function keyDownEcs(event) {
+      if (event.code === 'Escape') {
+        exit();
+      }
+    }
+
+    function exit() {
+      close.removeEventListener('click', exit);
+      window.removeEventListener('keydown', keyDownEcs);
+      Massagebad.classList.remove('popup_open');
+      lastFocus.focus();
+    }
+  })
+})();
