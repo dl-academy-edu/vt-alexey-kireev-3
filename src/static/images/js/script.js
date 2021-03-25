@@ -1,6 +1,6 @@
 const SERVER_URL = 'https://academy.directlinedev.com';
 const VERSION_API = '1.0.0';
-// Open close popup signIn js 
+// Open close popup
 
 const SingInpopup = document.querySelector('.SignIn-popup_js');
 const mobileSingInpopup = document.querySelector('.mobile-SignIn-popup_js');
@@ -24,20 +24,107 @@ const MessageButton = document.querySelector('.MessageButton_js');
 const Emailsend = document.querySelector('.Emailsend_js');
 const MassageForm = document.querySelector('.MassageForm_js');
 const Massagegood = document.querySelector('.goodmessage_js');
-const Massagebad = document.querySelector('.badmessage_js');
+const Massagebad = document.querySelector('.badMessage_js');
 const registerCheck = document.querySelector('.registerCheck_js');
 const registerButton = document.querySelector('.registerButton_js');
 const Buttonsend = document.querySelector('.Buttonsend_js');
 const Checkboxsend = document.querySelector('.Checkboxsend_js');
 
 
- // loader
+//buttons
 
- function preloaderCreater() {
-  return `<div class="loader"></div>`;
+let buttonSingin = document.querySelector(".button-sing-in_js");
+let buttonreg = document.querySelector(".button-reg_js");
+let buttonmessage = document.querySelector(".button-message_js");
+let buttonpassword = document.querySelector(".button-password_js");
+
+function InvalidButtonSingIn() {
+  buttonSingin.classList.remove("button_good");
+  buttonSingin.classList.add("button_bad");
 }
 
- 
+function ValidButtonSingIn() {
+  buttonSingin.classList.remove("button_bad");
+  buttonSingin.classList.add("button_good");
+}
+
+function InvalidButtonreg() {
+  buttonreg.classList.remove("button_good");
+  buttonreg.classList.add("button_bad");
+}
+
+function ValidButtonreg() {
+  buttonreg.classList.remove("button_bad");
+  buttonreg.classList.add("button_good");
+}
+
+function InvalidButtonmessage() {
+  buttonmessage.classList.remove("button_good");
+  buttonmessage.classList.add("button_bad");
+} 
+
+function ValidButtonmessage() {
+  buttonmessage.classList.remove("button_bad");
+  buttonmessage.classList.add("button_good");
+} 
+
+function InvalidButtonpassword() {
+  buttonpassword.classList.remove("button_good");
+  buttonpassword.classList.add("button_bad");
+} 
+
+function ValidButtonpassword() {
+  buttonpassword.classList.remove("button_bad");
+  buttonpassword.classList.add("button_good");
+} 
+
+
+//token
+
+function updateToken(response) {
+  localStorage.setItem('token', response.token);
+  localStorage.setItem('userId', response.userId);
+}
+
+function headerUpdate() {
+  if (localStorage.getItem('token')) {
+    SingInpopup.classList.add('hidden');
+    mobileSingInpopup.classList.add('hidden');
+    registerpopup.classList.add('hidden');
+    mobileregisterpopup.classList.add('hidden');
+    profile.classList.remove('hidden');
+    mobileprofile.classList.remove('hidden');
+    OutProfile.classList.remove("hidden");
+    OutProfileMobile.classList.remove("hidden");
+  } else {
+    SingInpopup.classList.remove('hidden');
+    mobileSingInpopup.classList.remove('hidden');
+    registerpopup.classList.remove('hidden');
+    mobileregisterpopup.classList.remove('hidden');
+    profile.classList.add('hidden');
+    mobileprofile.classList.add('hidden');
+    OutProfile.classList.add("hidden");
+    OutProfileMobile.classList.add("hidden");
+  }
+}
+
+// loader
+
+const loaderinner = document.querySelector(".loaderinner_js");
+
+function preloaderCreater() {
+  return `
+  <div class="loader-inner">
+  <div class="loader-inner__loader"></div>
+  </div>
+  `;
+}
+
+function preloaderCreaterblog() {
+  return `
+  <div class="loader-inner__loader"></div>
+  `;
+}
 
 //open popup login
 (function () {
@@ -104,6 +191,60 @@ const Checkboxsend = document.querySelector('.Checkboxsend_js');
   })
 })();
 
+
+//Register 
+(function () {
+
+  let removeArr = [];
+  let isLoadingRegister = false;
+
+  registerForm.addEventListener('submit', function (event) {
+    event.preventDefault();
+    if (isLoadingRegister) {
+      return
+    }
+    isLoadingRegister = true;
+    const data = getFormData(event.target);
+    let errors = validateData(data);
+    removeArr.forEach(fn => fn());
+    if (Object.keys(errors).length) {
+      InvalidButtonreg()
+      removeArr = setFormError(registerForm, errors);
+      isLoadingRegister = false;
+      return
+    }
+
+    loaderinner.innerHTML = preloaderCreater();
+
+    fetchData({
+      method: 'POST',
+      url: '/api/users',
+      body: JSON.stringify(data),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(res => {
+        return res.json();
+      })
+      .then(res => {
+
+        if (res.success) {
+          ValidButtonreg();
+          setTimeout(function () {
+            loaderinner.innerHTML = "";
+            alert('Успешная регистрация')
+            RegisterOpenpopup.classList.remove('popup_open');
+          }, 1000);
+
+        } else {
+          throw res;
+        }
+        isLoadingRegister = false;
+      })
+
+  })
+})();
 
 // Open close popup Register
 (function () {
@@ -174,123 +315,13 @@ const Checkboxsend = document.querySelector('.Checkboxsend_js');
   })
 })();
 
-//Register 
-(function(){
-  
-  let removeArr = [];
-  let isLoadingRegister = false;
-
-  registerForm.addEventListener('submit', function (event) {
-    event.preventDefault();
-    if (isLoadingRegister) {
-      return
-    }
-    isLoadingRegister = true;
-    const data = getFormData(event.target);
-    let errors = validateData(data);
-    removeArr.forEach(fn => fn());
-    if(Object.keys(errors).length) {
-      removeArr = setFormError (registerForm, errors);
-      isLoadingRegister = false;
-      return
-    }
-
-    fetchData({
-      method : 'POST',
-      url : '/api/users',
-      body: JSON.stringify(data),
-      headers:{
-        'Content-Type':'application/json'
-      }
-    })
-    .then (res=>{
-        return res.json();
-    })
-    .then (res=>{
-    
-      if (res.success) {
-        alert('Succsess registration');
-        popupRegisterOpen.classList.remove('popup_open');
-
-      } else{
-        throw res;
-      }
-      isLoadingRegister = false;
-    })
-    .catch(err => {
-      for (key in err.errors) {
-        setFormError(registerForm, err.errors);
-        isLoadingRegister = false;
-      }
-    })
-  })
-
-})();
-//login 
- 
-(function () {
-
-  let isLoadingLogin = false;
-  let removeArr = [];
- 
-  signIn.addEventListener('submit', function logIn(e) {
-    e.preventDefault();        
-    if (isLoadingLogin) {
-      return    
-       
-    }      
-    isLoadingLogin = true; 
- 
-    const data = getFormData(signIn);
-    let errors = validateDataLogin(data);
-    removeArr.forEach(fn => fn());    
-    if (Object.keys(errors).length) {
-      removeArr = setFormError(signIn, errors);
-      isLoadingRegister = false;  
-      return   
-    }
-
-     
-    signIn.innerHTML = preloaderCreater();  
-    fetchData({
-      method: 'POST',
-      url: '/api/users/login',
-      body: JSON.stringify(data),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })  
-      .then(res => res.json())
-      .then(res => {   
-        if (res.success) {     
-          alert('Пользователь успешно вошел, ID:\n' + res.data.userId)
-          updateToken(res.data);
-          headerUpdate();     
-          SignInpopup.classList.remove('popup_open');
-          isLoadingLogin = false; 
-        } else {
-          throw res; 
-        }
-      })
-      .catch(err => {
-        for (key in err.errors) {
-          setFormError(signIn, err.errors);
-          isLoadingLogin = false;
-        }
-      })
-  })
-})();
-
-headerUpdate();
- 
-
 
 //active page
 
 let pageId = document.querySelector("[data-id-page]").getAttribute("data-id-page"),
   navItem = document.querySelector(`[data-id-nav=${pageId}]`);
 
-if(pageId == navItem.getAttribute("data-id-nav")) {
+if (pageId == navItem.getAttribute("data-id-nav")) {
   navItem.classList.add("header__link_active");
 }
 
@@ -299,11 +330,9 @@ if(pageId == navItem.getAttribute("data-id-nav")) {
 let pageIdMobile = document.querySelector("[data-id-page]").getAttribute("data-id-page"),
   navItemMobile = document.querySelector(`[m-data-id-nav=${pageIdMobile}]`);
 
-if(pageIdMobile == navItemMobile.getAttribute("m-data-id-nav")) {
- navItemMobile.classList.add("mobile-header__link_active");
+if (pageIdMobile == navItemMobile.getAttribute("m-data-id-nav")) {
+  navItemMobile.classList.add("mobile-header__link_active");
 }
-
-
 
 //mobile-menu
 
@@ -312,11 +341,11 @@ var headerMobileButton = document.querySelector(".header__mobile-button_js");
 var mobileCloseButton = document.querySelector(".mobile-header__close-button_js");
 
 headerMobileButton.addEventListener("click", function () {
-    mobileHeader.classList.add("mobile-header_open");
+  mobileHeader.classList.add("mobile-header_open");
 });
 
 mobileCloseButton.addEventListener("click", function () {
-    mobileHeader.classList.remove("mobile-header_open");
+  mobileHeader.classList.remove("mobile-header_open");
 });
 
 /* Sing out profile */
@@ -324,62 +353,34 @@ mobileCloseButton.addEventListener("click", function () {
 let singOutProfile = document.querySelector(".singout_js");
 let singOutProfileMobile = document.querySelector(".mobile-singout_js");
 
-singOutProfile.addEventListener("click", function(){
+singOutProfile.addEventListener("click", function () {
   localStorage.removeItem("token");
   window.location.pathname = "/index.html";
 });
 
-singOutProfileMobile.addEventListener("click", function(){
+singOutProfileMobile.addEventListener("click", function () {
   localStorage.removeItem("token");
   window.location.pathname = "/index.html";
 });
-
-
-//Кнопка наверх
-(function() {
-  function trackScroll() {
-    let scrolled = window.pageYOffset;
-
-    if (scrolled < 1500) {
-      goTopBtn.classList.add('scroll_hidden');
-    }
-    if (scrolled > 1500) {
-      goTopBtn.classList.remove('scroll_hidden');
-    }
-  }
-
-  function backToTop() {
-    let scrollStep = window.pageYOffset / 50;
-    if (window.pageYOffset > 0) {
-      window.scrollBy(0, -(scrollStep));
-      setTimeout(backToTop, 0);
-    }
-  }
-
-  let goTopBtn = document.querySelector('.scroll_js');
-
-  window.addEventListener('scroll', trackScroll);
-  goTopBtn.addEventListener('click', backToTop);
-})();
 
 
 //Validation
 
-function validateData (data, errors={}) {
+function validateData(data, errors = {}) {
 
-  if(!checkEmail(data.email)){
+  if (!checkEmail(data.email)) {
     errors.email = 'Please enter a valid email address (your entry is not in the format "somebody@example.com")';
   }
-  if(data.password!=data.repeatPassword){
+  if (data.password != data.repeatPassword) {
     errors.password = 'The password and confirm password fields do not match.';
   }
   if (!data.password) {
     errors.password = 'This field is required';
 
-  } else if (data.password.length<8){
+  } else if (data.password.length < 8) {
     errors.password = 'The password is too short';
   }
-  
+
   if (!data.name) {
     errors.name = 'This field is required';
   }
@@ -389,25 +390,25 @@ function validateData (data, errors={}) {
   if (!data.location) {
     errors.location = 'This field is required';
   }
-  if (+(data.age)<=0) {
+  if (+(data.age) <= 0) {
     errors.age = 'Age is incorrect';
   }
   return errors;
 }
 
-function validateDataLogin (data, errors={}) {
+function validateDataLogin(data, errors = {}) {
 
-  if(!checkEmail(data.email)){
+  if (!checkEmail(data.email)) {
     errors.email = 'Please enter a valid email address (your entry is not in the format "somebody@example.com")';
   }
- 
+
   if (!data.password) {
     errors.password = 'This field is required';
 
-  } else if (data.password.length<8){
+  } else if (data.password.length < 8) {
     errors.password = 'The password is too short';
   }
-  
+
   return errors;
 }
 
@@ -415,16 +416,16 @@ function checkEmail(email) {
   return email.match(/^[0-9a-z-\.]+\@[0-9a-z-]{2,}\.[a-z]{2,}$/i);
 }
 
-function validateSendMessage (data, errors={}) {
+function validateSendMessage(data, errors = {}) {
 
-  if(!checkEmail(data.email)){
+  if (!checkEmail(data.email)) {
     errors.email = 'Please enter a valid email address (your entry is not in the format "somebody@example.com")';
   }
- 
+
   if (!data.phone) {
     errors.phone = 'This field is required';
 
-  }  
+  }
   if (!data.name) {
     errors.name = 'This field is required';
   }
@@ -434,87 +435,121 @@ function validateSendMessage (data, errors={}) {
   return errors;
 }
 
-function getFormData(form, data = {}, type ='json'){
-  if (type === 'json'){
-    let inputs = form.querySelectorAll ('input');
+function getFormData(form, data = {}, type = 'json') {
+  if (type === 'json') {
+    let inputs = form.querySelectorAll('input');
     for (let input of inputs) {
-        switch (input.type) {
-          case 'radio':
-            if(input.checked) {
-              data[input.name] = input.value;
-            }
-            break;
-            case 'checkbox':
-            if(!data[input.name]) {
-              data[input.name] = [];
-            }
-            if (input.checked){
-              data[input.name].push(input.value);
-            }
-            break;
-          case 'file':
-              data[input.name] = input.files;
-              break;
-            
-          default:
+      switch (input.type) {
+        case 'radio':
+          if (input.checked) {
             data[input.name] = input.value;
-            break;
-        }
+          }
+          break;
+        case 'checkbox':
+          if (!data[input.name]) {
+            data[input.name] = [];
+          }
+          if (input.checked) {
+            data[input.name].push(input.value);
+          }
+          break;
+        case 'file':
+          data[input.name] = input.files;
+          break;
+
+        default:
+          data[input.name] = input.value;
+          break;
+      }
     }
-  let textareas = form.querySelectorAll('textarea');
+    let textareas = form.querySelectorAll('textarea');
     for (let textarea of textareas) {
       data[textarea.name] = textarea.value;
     }
-  return data;
+    return data;
   } else {
     return new FormData(form);
   }
- 
 }
 
-
-
-
 function setInvalid(input) {
-  function handl (){
+  function handl() {
     input.removeEventListener('input', handl);
-    input.classList.remove ("invalidInput");
+    input.classList.remove("invalidInput");
   }
-  input.classList.add ("invalidInput");
+  input.classList.add("invalidInput");
   input.addEventListener('input', handl);
   return handl;
 }
 function giveInputFeedback(input, error) {
-  function handl (){
+  function handl() {
     message.remove();
     input.removeEventListener('input', handl);
   }
 
-  input.classList.add ("invalidInput");
+  input.classList.add("invalidInput");
   let message = document.createElement('div');
-  message.classList.add ("invalidMessage");
+  message.classList.add("invalidMessage");
   message.innerText = error;
-  input.insertAdjacentElement("afterend",message);
+  input.insertAdjacentElement("afterend", message);
 
   input.addEventListener('input', handl);
   return handl;
 }
 
-function setFormError (form, errors) {
+
+function inputSetNormalFeedback(input) {
+  if (input.classList.add("valid-feedback")) {
+    return;
+  }
+  input.classList.add("valid-feedback", "");
+  function handel() {
+    message.remove();
+    input.removeEventListener("input", handel);
+    input.removeAttribute("valid-feedback");
+  }
+  let message = document.createElement('div');
+  message.classList.add("valid-feedback");
+  message.innerText = "All right";
+  input.addEventListener('input', handel);
+
+}
+
+function setFormError(form, errors) {
+  let inputs = form.querySelectorAll("input");
+  for (let input of inputs) {
+    if (errors[input.name]) {
+      inputSetInvalid(input);
+      inputSetInvalidFeedback(input, errors[input.name]);
+    } else {
+      inputSetNormal(input);
+      inputSetNormalFeedback(input);
+    }
+  }
+  let textareas = form.querySelectorAll("textarea");
+  for (let textarea of textareas) {
+    if (errors[textarea.name]) {
+      inputSetInvalid(textarea);
+      inputSetInvalidFeedback(input, errors[input.name]);
+    }
+  }
+}
+
+function setFormError(form, errors) {
   let removeArr = [];
-  let inputs = form.querySelectorAll ('input');
+  let inputs = form.querySelectorAll('input');
   let textareas = form.querySelectorAll('textarea');
 
   for (let input of inputs) {
-    if(errors[input.name]){
+    if (errors[input.name]) {
       const remove1 = setInvalid(input);
       const remove2 = giveInputFeedback(input, errors[input.name]);
       removeArr.push(remove1, remove2);
     }
   }
 
-  for (let textarea of textareas) { 
-    if(errors[textarea.name]) {
+  for (let textarea of textareas) {
+    if (errors[textarea.name]) {
       const remove3 = setInvalid(textarea);
       const remove4 = giveInputFeedback(input, errors[textarea.name]);
       removeArr.push(remove3, remove4);
@@ -523,40 +558,123 @@ function setFormError (form, errors) {
   return removeArr;
 }
 
-function fetchData ({method= 'GET', url = '',body = null, headers = {} }){
+//login 
+
+(function () {
+
+  let isLoadingLogin = false;
+  let removeArr = [];
+
+  signIn.addEventListener('submit', function logIn(e) {
+    e.preventDefault();
+    if (isLoadingLogin) {
+      return
+    }
+    isLoadingLogin = true;
+
+    const data = getFormData(signIn);
+    let errors = validateDataLogin(data);
+    removeArr.forEach(fn => fn());
+    if (Object.keys(errors).length) {
+      InvalidButtonSingIn();
+      errors.email = 'This combination, mail and password were not found!';
+      removeArr = setFormError(signIn, errors);
+      isLoadingRegister = false;
+      return 
+    }
+
+    loaderinner.innerHTML = preloaderCreater();      
+
+    fetchData({
+      method: 'POST',
+      url: '/api/users/login',
+      body: JSON.stringify(data),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(res => res.json())
+      .then(res => { 
+        ValidButtonSingIn();
+        if (res.success) {
+          loaderinner.innerHTML = '';
+           setTimeout(function () {
+            alert('Пользователь успешно вошел, ID:\n' + res.data.userId)
+            updateToken(res.data);
+            headerUpdate();
+            SignInpopup.classList.remove('popup_open');
+          }, 1000);
+          isLoadingLogin = false;
+        } else {
+          throw res;
+        }
+      })
+
+  })
+
+})();
+
+headerUpdate();
+
+function setInvalid(input) {
+  function handl() {
+    input.removeEventListener('input', handl);
+    input.classList.remove("invalidInput");
+  }
+  input.classList.add("invalidInput");
+  input.addEventListener('input', handl);
+  return handl;
+}
+function giveInputFeedback(input, error) {
+  function handl() {
+    message.remove();
+    input.removeEventListener('input', handl);
+  }
+
+  input.classList.add("invalidInput");
+  let message = document.createElement('div');
+  message.classList.add("invalidMessage");
+  message.innerText = error;
+  input.insertAdjacentElement("afterend", message);
+
+  input.addEventListener('input', handl);
+  return handl;
+}
+
+function setFormError(form, errors) {
+  let removeArr = [];
+  let inputs = form.querySelectorAll('input');
+  let textareas = form.querySelectorAll('textarea');
+
+  for (let input of inputs) {
+    if (errors[input.name]) {
+      const remove1 = setInvalid(input);
+      const remove2 = giveInputFeedback(input, errors[input.name]);
+      removeArr.push(remove1, remove2);
+    }
+  }
+
+  for (let textarea of textareas) {
+    if (errors[textarea.name]) {
+      const remove3 = setInvalid(textarea);
+      const remove4 = giveInputFeedback(input, errors[textarea.name]);
+      removeArr.push(remove3, remove4);
+    }
+  }
+  return removeArr;
+}
+
+//fetch
+
+function fetchData({ method = 'GET', url = '', body = null, headers = {} }) {
   return fetch(SERVER_URL + url, {
-    method:method,
+    method: method,
     body: body,
     headers: headers,
   })
 }
 
-function updateToken(response) {
-  localStorage.setItem('token', response.token);
-  localStorage.setItem('userId', response.userId);
-}
-
-function headerUpdate() {
-  if (localStorage.getItem('token')) {
-    SingInpopup.classList.add('hidden');
-    mobileSingInpopup.classList.add('hidden');
-    registerpopup.classList.add('hidden');
-    mobileregisterpopup.classList.add('hidden');
-    profile.classList.remove('hidden');
-    mobileprofile.classList.remove('hidden');
-    OutProfile.classList.remove("hidden");
-    OutProfileMobile.classList.remove("hidden");
-  } else {
-    SingInpopup.classList.remove('hidden');
-    mobileSingInpopup.classList.remove('hidden');
-    registerpopup.classList.remove('hidden');
-    mobileregisterpopup.classList.remove('hidden');
-    profile.classList.add('hidden');
-    mobileprofile.classList.add('hidden');
-    OutProfile.classList.add("hidden");
-    OutProfileMobile.classList.add("hidden");
-  }
-}
+//checkbox
 
 function setValueToForm(form, data) {
   let inputs = form.querySelectorAll('input');
@@ -614,7 +732,7 @@ function isDisabled(elem, button) {
 
 })();
 
- // Open popup send Message 
+// Open popup send Message 
 (function () {
 
   let lastFocus;
@@ -670,111 +788,110 @@ function slider(selectorStr) {
   setButtonState(buttonBack);
 
   function initSlideWidth() {
-      slideWidth = wrapper.offsetWidth;
-      for (let slide of slides) {
-          slide.style.width = `${slideWidth}px`;
-      }
+    slideWidth = wrapper.offsetWidth;
+    for (let slide of slides) {
+      slide.style.width = `${slideWidth}px`;
+    }
   }
   initSlideWidth();
 
   function setButtonState(button, state = false) {
-      if (state) {
-          button.removeAttribute('disabled');
-      } else {
-          button.setAttribute('disabled', '');
-      }
+    if (state) {
+      button.removeAttribute('disabled');
+    } else {
+      button.setAttribute('disabled', '');
+    }
   }
 
   function setActiveSlide(index, withAnimation = true) {
-      if (index < 0 || index > maxSlideIndex) {
-          return;
-      }
-      clearTimeout(timerId);
-      if (withAnimation) {
-          innerWrapper.style.transition = 'transform 500ms';
-          timerId = setTimeout(() => {
-              innerWrapper.style.transition = '';
-          }, 500);
-      }
-      setButtonState(buttonNext, true);
-      setButtonState(buttonBack, true);
-      index === 0 && setButtonState(buttonBack);
-      index === maxSlideIndex && setButtonState(buttonNext);
-      innerWrapper.style.transform = `translateX(${index * slideWidth * (-1)}px)`;
-      dots[activeSlide].classList.remove('slider__dot_active');
-      activeSlide = index;
-      dots[activeSlide].classList.add('slider__dot_active');
-      localStorage.setItem('activeSlide', activeSlide);
+    if (index < 0 || index > maxSlideIndex) {
+      return;
+    }
+    clearTimeout(timerId);
+    if (withAnimation) {
+      innerWrapper.style.transition = 'transform 500ms';
+      timerId = setTimeout(() => {
+        innerWrapper.style.transition = '';
+      }, 500);
+    }
+    setButtonState(buttonNext, true);
+    setButtonState(buttonBack, true);
+    index === 0 && setButtonState(buttonBack);
+    index === maxSlideIndex && setButtonState(buttonNext);
+    innerWrapper.style.transform = `translateX(${index * slideWidth * (-1)}px)`;
+    dots[activeSlide].classList.remove('slider__dot_active');
+    activeSlide = index;
+    dots[activeSlide].classList.add('slider__dot_active');
+    localStorage.setItem('activeSlide', activeSlide);
   }
 
   buttonNext.addEventListener('click', function () {
-      setActiveSlide(activeSlide + 1);
+    setActiveSlide(activeSlide + 1);
   });
 
   buttonBack.addEventListener('click', function () {
-      setActiveSlide(activeSlide - 1);
+    setActiveSlide(activeSlide - 1);
   });
 
   window.addEventListener('resize', function () {
-      initSlideWidth();
-      setActiveSlide(activeSlide, false);
+    initSlideWidth();
+    setActiveSlide(activeSlide, false);
   });
 
   let isTouch = false;
   let startX = 0;
   let endX = 0;
   wrapper.addEventListener('touchstart', function (e) {
-      if (isTouch) return;
-      isTouch = true;
-      startX = e.touches[0].pageX;
+    if (isTouch) return;
+    isTouch = true;
+    startX = e.touches[0].pageX;
   });
 
   wrapper.addEventListener('touchmove', function (e) {
-      if (!isTouch) return;
-      endX = e.touches[0].pageX;
+    if (!isTouch) return;
+    endX = e.touches[0].pageX;
   });
 
   wrapper.addEventListener('touchend', function (e) {
-      if (!isTouch) return;
-      isTouch = false;
-      if (Math.abs(startX - endX) < 50) {
-          return;
-      }
-      if (startX - endX < 0) {
-          setActiveSlide(activeSlide - 1);
-      }
+    if (!isTouch) return;
+    isTouch = false;
+    if (Math.abs(startX - endX) < 50) {
+      return;
+    }
+    if (startX - endX < 0) {
+      setActiveSlide(activeSlide - 1);
+    }
 
-      if (startX - endX > 0) {
-          setActiveSlide(activeSlide + 1);
-      }
+    if (startX - endX > 0) {
+      setActiveSlide(activeSlide + 1);
+    }
   });
 
   function initDots() {
-      for (let i = 0; i < maxSlideIndex + 1; i++) {
-          let dot = document.createElement('button');
-          dot.classList.add('slider__dot');
-          if (i === activeSlide) {
-              dot.classList.add('slider__dot_active');
-          }
-          dots.push(dot);
-          dot.addEventListener('click', function () {
-              setActiveSlide(i);
-          })
-          pagination.insertAdjacentElement('beforeend', dot);
+    for (let i = 0; i < maxSlideIndex + 1; i++) {
+      let dot = document.createElement('button');
+      dot.classList.add('slider__dot');
+      if (i === activeSlide) {
+        dot.classList.add('slider__dot_active');
       }
+      dots.push(dot);
+      dot.addEventListener('click', function () {
+        setActiveSlide(i);
+      })
+      pagination.insertAdjacentElement('beforeend', dot);
+    }
   }
 
   setActiveSlide(activeSlide, false);
 
   return {
-      setActiveSlide,
-      next: () => setActiveSlide(activeSlide + 1),
-      prev: () => setActiveSlide(activeSlide - 1),
+    setActiveSlide,
+    next: () => setActiveSlide(activeSlide + 1),
+    prev: () => setActiveSlide(activeSlide - 1),
   }
 }
 
 const mySlider = slider('.slider');
-
 
 
 // swiper
@@ -784,16 +901,16 @@ const swiper = new Swiper('.swiper-container', {
   loop: true,
 
   navigation: {
-      color: '#000',
-      nextEl: '.swiper-button-next',
-      prevEl: '.swiper-button-prev',
+    color: '#000',
+    nextEl: '.swiper-button-next',
+    prevEl: '.swiper-button-prev',
   },
 });
 
 // rating
 
 const ratings = {
-  html: 85 ,
+  html: 85,
   css: 55,
   js: 5,
   git: 15,
@@ -810,14 +927,11 @@ function getRatings() {
 
     const starPercentageRounded = `${Math.round(starPercentage / 1) * 1}%`;
 
-    document.querySelector(`.${rating} .skills__level-inner` ).style.width = starPercentageRounded;
+    document.querySelector(`.${rating} .skills__level-inner`).style.width = starPercentageRounded;
 
-    document.querySelector(`.${rating} .skills__value`)  .innerHTML = ratings[rating];
+    document.querySelector(`.${rating} .skills__value`).innerHTML = ratings[rating];
   }
 };
-
-
-  
 
 //send message
 (function () {
@@ -840,6 +954,7 @@ function sendMessage(event) {
   let errors = validateSendMessage(data);
   removeArr.forEach(fn => fn());
   if (Object.keys(errors).length) {
+    InvalidButtonmessage();
     removeArr = setFormError(event.target, errors);
     isSending = false;
     return
@@ -847,6 +962,9 @@ function sendMessage(event) {
   let items = {};
   items.body = JSON.stringify(data);
   items.to = '111@asdas.com'
+
+  loaderinner.innerHTML = preloaderCreater();
+
   fetch(SERVER_URL + '/api/emails', {
     method: 'POST',
     body: JSON.stringify(items),
@@ -856,21 +974,19 @@ function sendMessage(event) {
 
   })
     .then(res => res.json())
-    .then(res => {
+    .then(res => {   
+       ValidButtonmessage(); 
       if (res.success)
-        alert('Emeil was sending');
+      loaderinner.innerHTML = "";  
+      setTimeout(function () {
+        loaderinner.innerHTML = "";  
         MessageOpenpopup.classList.remove('popup_open');
-        Massagegood.classList.add('popup_open');
-
+      Massagegood.classList.add('popup_open');
+      }, 1000);
     }
     )
-    .catch(() => {
-      console.error('Something was wrong. Try again');
-      MessageOpenpopup.classList.remove('popup_open');
-      Massagebad.classList.add('popup_open');
-    })
 }
-  // Open popup Message good
+// Open popup Message good
 (function () {
 
   let lastFocus;
@@ -931,4 +1047,31 @@ function sendMessage(event) {
       lastFocus.focus();
     }
   })
+})();
+
+//Кнопка наверх
+(function () {
+  function trackScroll() {
+    let scrolled = window.pageYOffset;
+
+    if (scrolled < 1500) {
+      goTopBtn.classList.add('scroll_hidden');
+    }
+    if (scrolled > 1500) {
+      goTopBtn.classList.remove('scroll_hidden');
+    }
+  }
+
+  function backToTop() {
+    let scrollStep = window.pageYOffset / 50;
+    if (window.pageYOffset > 0) {
+      window.scrollBy(0, -(scrollStep));
+      setTimeout(backToTop, 0);
+    }
+  }
+
+  let goTopBtn = document.querySelector('.scroll_js');
+
+  window.addEventListener('scroll', trackScroll);
+  goTopBtn.addEventListener('click', backToTop);
 })();

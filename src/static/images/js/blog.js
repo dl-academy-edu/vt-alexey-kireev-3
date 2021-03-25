@@ -33,7 +33,7 @@ form.addEventListener('submit', function submit(event) {
     }
     setParamsToURL(fullData);
 
-    result.innerHTML = preloaderCreater();       
+    result.innerHTML = preloaderCreaterblog();       
     getPost(fullData, function callback(xhr) {
         const response = JSON.parse(xhr.response);
         if (response.success) {
@@ -61,6 +61,7 @@ form.addEventListener('submit', function submit(event) {
 
 
 });
+
 
 //Button Reset parametrs
 reset.addEventListener('click', function () {
@@ -152,7 +153,7 @@ function getTags() {
     const box = document.querySelector('.tagBox_js');
 
     xhr.open('GET', `${SERVER_URL}/api/tags`);    
-    box.innerHTML = preloaderCreater();      
+    box.innerHTML = preloaderCreaterblog();      
     xhr.send();
     
     xhr.onload = function () {

@@ -66,7 +66,7 @@ function getUserDate() {
     })
 }
 
-//Open popup change data
+//Open popup profile
 (function () {
 
   changeDataOpen.addEventListener('click', function (e) {
@@ -95,7 +95,7 @@ function getUserDate() {
 
 })();
 
-//Open popup change password
+//Open popup password
 (function () {
 
   changePasswordOpen.addEventListener('click', function (e) {
@@ -194,11 +194,12 @@ function changeUserPassword(e) {
 
   isLoadingChangePassword = true;
 
-  // copipaste
+  // password form
   const body = getFormData(e.target, {}, type = 'json');
   let errors = validateDataPassword(body);
   removeArr.forEach(fn => fn());
   if (Object.keys(errors).length) {
+    InvalidButtonpassword()
     removeArr = setFormError(changePassword, errors);
     isLoadingChangePassword = false;
     return
@@ -215,7 +216,8 @@ function changeUserPassword(e) {
     .then(res => res.json())
     .then(res => {
 
-      if (res.success) {       
+      if (res.success) {      
+        ValidButtonpassword(); 
         userData = res.data;
         rerenderUser(userData);
         changePassword.classList.remove('popup_open');
