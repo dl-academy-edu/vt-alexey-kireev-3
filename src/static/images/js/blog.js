@@ -72,22 +72,23 @@ reset.addEventListener('click', function () {
 
 buttonPrev.addEventListener('click', function () {
     if (fullData.page <= 0) {
+        buttonPrev.classList.add('pagination__button_disabled');
         return          
- 
     } else {
         console.log(fullData.page);
         fullData.page -= 1;      
         formSubmit.click(); 
-     
+        buttonPrev.classList.remove('pagination__button_disabled');
     }
 })
 buttonNext.addEventListener('click', function () {
-    if (fullData.page >= links.length - 1) {
-        return    
+    if (fullData.page >= links.length - 1) {    
+         buttonNext.classList.add('pagination__button_disabled');
+         return   
+         
     }
     fullData.page += 1;
     formSubmit.click();     
-
 })
 
  
@@ -323,8 +324,12 @@ function paginationCreate(response, paginationLink, data) {
     for (let i = 0; i < quantity; i++) {
         if (data.page === i) {
             paginationLink.innerHTML += `<a href="?page=${i}" class="pagination__num pagination__num_active link_js">${i + 1}</a>`
+            buttonPrev.classList.remove('pagination__button_disabled');
+            buttonNext.classList.remove('pagination__button_disabled');
         } else {
             paginationLink.innerHTML += `<a href="?page=${i}" class="pagination__num link_js">${i + 1}</a>`
+            buttonPrev.classList.remove('pagination__button_disabled');
+            buttonNext.classList.remove('pagination__button_disabled');
         }
 
 

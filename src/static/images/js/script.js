@@ -580,6 +580,7 @@ function setFormError(form, errors) {
       errors.email = 'This combination, mail and password were not found!';
       removeArr = setFormError(signIn, errors);
       isLoadingRegister = false;
+      isLoadingLogin = false;
       return 
     }
 
@@ -603,12 +604,24 @@ function setFormError(form, errors) {
             updateToken(res.data);
             headerUpdate();
             SignInpopup.classList.remove('popup_open');
+            isLoadingLogin = false;
+            isLoadingRegister = false;
+
           }, 1000);
-          isLoadingLogin = false;
+ 
         } else {
-          throw res;
+          throw errors;
         }
       })
+
+      .catch(function(errors) {       
+        loaderinner.innerHTML = '';
+        InvalidButtonSingIn();
+        errors.email = 'This combination, mail and password were not found!';             
+        removeArr = setFormError(signIn, errors);
+        isLoadingRegister = false;
+        isLoadingLogin = false;
+      });
 
   })
 

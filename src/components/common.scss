@@ -29,9 +29,6 @@ p {
   font-family: "Gilroy", Arial, sans-serif;
 }
 
-
-
-
 .container {
   max-width: 1440px;
   padding-left: 220px;
@@ -290,6 +287,10 @@ img {
 
 .invalidInput {
   border-color: #eb3617;
+}
+
+.validInput {
+  border-color: #27eb00;
 }
 
 .invalidMessage {
