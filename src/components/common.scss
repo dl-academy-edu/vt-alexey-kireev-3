@@ -290,7 +290,7 @@ img {
 }
 
 .validInput {
-  border-color: #27eb00;
+  border-color: #03BC3C;
 }
 
 .invalidMessage {
@@ -299,6 +299,14 @@ img {
   line-height: 16px;
 
   color: #eb3617;
+}
+
+.validMessage {
+  margin-top: 10px;
+  font-size: 14px;
+  line-height: 16px;
+
+  color: #03BC3C;
 }
 
 .invalid-feedback {
@@ -314,7 +322,7 @@ img {
   max-width: 290px;
   font-size: 14px;
   line-height: 16px;
-  color: green;
+  color: #03BC3C;
 }
 
 .button {

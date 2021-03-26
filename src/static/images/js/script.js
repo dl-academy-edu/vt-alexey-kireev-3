@@ -366,21 +366,21 @@ singOutProfileMobile.addEventListener("click", function () {
 
 //Validation
 
-function validateData(data, errors = {}) {
+function validateData (data, errors={}) {
 
-  if (!checkEmail(data.email)) {
+  if(!checkEmail(data.email)){
     errors.email = 'Please enter a valid email address (your entry is not in the format "somebody@example.com")';
   }
-  if (data.password != data.repeatPassword) {
+  if(data.password!=data.repeatPassword){
     errors.password = 'The password and confirm password fields do not match.';
   }
   if (!data.password) {
     errors.password = 'This field is required';
 
-  } else if (data.password.length < 8) {
+  } else if (data.password.length<8){
     errors.password = 'The password is too short';
   }
-
+  
   if (!data.name) {
     errors.name = 'This field is required';
   }
@@ -390,25 +390,25 @@ function validateData(data, errors = {}) {
   if (!data.location) {
     errors.location = 'This field is required';
   }
-  if (+(data.age) <= 0) {
+  if (+(data.age)<=0) {
     errors.age = 'Age is incorrect';
   }
   return errors;
 }
 
-function validateDataLogin(data, errors = {}) {
+function validateDataLogin (data, errors={}) {
 
-  if (!checkEmail(data.email)) {
+  if(!checkEmail(data.email)){
     errors.email = 'Please enter a valid email address (your entry is not in the format "somebody@example.com")';
   }
-
+ 
   if (!data.password) {
     errors.password = 'This field is required';
 
-  } else if (data.password.length < 8) {
+  } else if (data.password.length<8){
     errors.password = 'The password is too short';
   }
-
+  
   return errors;
 }
 
@@ -416,16 +416,16 @@ function checkEmail(email) {
   return email.match(/^[0-9a-z-\.]+\@[0-9a-z-]{2,}\.[a-z]{2,}$/i);
 }
 
-function validateSendMessage(data, errors = {}) {
+function validateSendMessage (data, errors={}) {
 
-  if (!checkEmail(data.email)) {
+  if(!checkEmail(data.email)){
     errors.email = 'Please enter a valid email address (your entry is not in the format "somebody@example.com")';
   }
-
+ 
   if (!data.phone) {
     errors.phone = 'This field is required';
 
-  }
+  }  
   if (!data.name) {
     errors.name = 'This field is required';
   }
@@ -435,121 +435,91 @@ function validateSendMessage(data, errors = {}) {
   return errors;
 }
 
-function getFormData(form, data = {}, type = 'json') {
-  if (type === 'json') {
-    let inputs = form.querySelectorAll('input');
+function getFormData(form, data = {}, type ='json'){
+  if (type === 'json'){
+    let inputs = form.querySelectorAll ('input');
     for (let input of inputs) {
-      switch (input.type) {
-        case 'radio':
-          if (input.checked) {
+        switch (input.type) {
+          case 'radio':
+            if(input.checked) {
+              data[input.name] = input.value;
+            }
+            break;
+            case 'checkbox':
+            if(!data[input.name]) {
+              data[input.name] = [];
+            }
+            if (input.checked){
+              data[input.name].push(input.value);
+            }
+            break;
+          case 'file':
+              data[input.name] = input.files;
+              break;
+            
+          default:
             data[input.name] = input.value;
-          }
-          break;
-        case 'checkbox':
-          if (!data[input.name]) {
-            data[input.name] = [];
-          }
-          if (input.checked) {
-            data[input.name].push(input.value);
-          }
-          break;
-        case 'file':
-          data[input.name] = input.files;
-          break;
-
-        default:
-          data[input.name] = input.value;
-          break;
-      }
+            break;
+        }
     }
-    let textareas = form.querySelectorAll('textarea');
+  let textareas = form.querySelectorAll('textarea');
     for (let textarea of textareas) {
       data[textarea.name] = textarea.value;
     }
-    return data;
+  return data;
   } else {
     return new FormData(form);
   }
+ 
 }
+ 
+
+
+
+
+
+//invalid form
 
 function setInvalid(input) {
-  function handl() {
+  function handl (){
     input.removeEventListener('input', handl);
-    input.classList.remove("invalidInput");
+    input.classList.remove ("invalidInput");
   }
-  input.classList.add("invalidInput");
+  input.classList.add ("invalidInput");
   input.addEventListener('input', handl);
   return handl;
 }
 function giveInputFeedback(input, error) {
-  function handl() {
+  function handl (){
     message.remove();
     input.removeEventListener('input', handl);
   }
 
-  input.classList.add("invalidInput");
+  input.classList.add ("invalidInput");
   let message = document.createElement('div');
-  message.classList.add("invalidMessage");
+  message.classList.add ("invalidMessage");
   message.innerText = error;
-  input.insertAdjacentElement("afterend", message);
+  input.insertAdjacentElement("afterend",message);
 
   input.addEventListener('input', handl);
   return handl;
 }
 
-
-function inputSetNormalFeedback(input) {
-  if (input.classList.add("valid-feedback")) {
-    return;
-  }
-  input.classList.add("valid-feedback", "");
-  function handel() {
-    message.remove();
-    input.removeEventListener("input", handel);
-    input.removeAttribute("valid-feedback");
-  }
-  let message = document.createElement('div');
-  message.classList.add("valid-feedback");
-  message.innerText = "All right";
-  input.addEventListener('input', handel);
-
-}
-
-function setFormError(form, errors) {
-  let inputs = form.querySelectorAll("input");
-  for (let input of inputs) {
-    if (errors[input.name]) {
-      inputSetInvalid(input);
-      inputSetInvalidFeedback(input, errors[input.name]);
-    } else {
-      inputSetNormal(input);
-      inputSetNormalFeedback(input);
-    }
-  }
-  let textareas = form.querySelectorAll("textarea");
-  for (let textarea of textareas) {
-    if (errors[textarea.name]) {
-      inputSetInvalid(textarea);
-      inputSetInvalidFeedback(input, errors[input.name]);
-    }
-  }
-}
-
-function setFormError(form, errors) {
+function setFormError (form, errors) {
   let removeArr = [];
-  let inputs = form.querySelectorAll('input');
+  let inputs = form.querySelectorAll ('input');
   let textareas = form.querySelectorAll('textarea');
 
   for (let input of inputs) {
-    if (errors[input.name]) {
+    if(errors[input.name]){
       const remove1 = setInvalid(input);
       const remove2 = giveInputFeedback(input, errors[input.name]);
       removeArr.push(remove1, remove2);
     }
   }
 
-  for (let textarea of textareas) {
-    if (errors[textarea.name]) {
+  for (let textarea of textareas) { 
+    if(errors[textarea.name]) {
       const remove3 = setInvalid(textarea);
       const remove4 = giveInputFeedback(input, errors[textarea.name]);
       removeArr.push(remove3, remove4);
@@ -557,6 +527,107 @@ function setFormError(form, errors) {
   }
   return removeArr;
 }
+
+
+
+
+
+// valid form
+
+function setvalid(input) {
+  function handll (){
+    input.removeEventListener('input', handll);
+    input.classList.remove ("validInput");
+  }
+  input.classList.add ("validInput");
+  input.addEventListener('input', handll);
+  return handll;
+}
+
+
+
+function giveInputFeedbackk(input) {
+  function handll (){
+    message.remove();
+    input.removeEventListener('input', handll);
+  }
+
+  input.classList.add ("validInput");
+  let message = document.createElement('div');
+  message.classList.add ("validMessage");
+  message.innerText = 'All right';
+  input.insertAdjacentElement("afterend",message);
+
+  input.addEventListener('input', handll);
+  return handll;
+}
+
+
+
+function setFormE (form, errors) {
+  let removeArr = [];
+  let inputs = form.querySelectorAll ('input');
+  let textareas = form.querySelectorAll('textarea');
+
+  for (let input of inputs) {
+    if(errors[input.name]){
+      const remove1 = setvalid(input);
+      const remove2 = giveInputFeedbackk(input, errors[input.name]);
+      removeArr.push(remove1, remove2);
+    }
+  }
+
+  for (let textarea of textareas) { 
+    if(errors[textarea.name]) {
+      const remove3 = setvalid(textarea);
+      const remove4 = giveInputFeedbackk(input, errors[textarea.name]);
+      removeArr.push(remove3, remove4);
+    }
+  }
+  return removeArr;
+}
+
+
+function verifiedMessageInputCreate (input) { 
+  let message = document.createElement("div");
+  message.classList.add("valid-feedback");
+  message.innerText = 'All right';
+
+  let nextMessage = input.nextElementSibling;
+  if(nextMessage != null) {
+    return
+  }
+
+  input.insertAdjacentElement("afterend", message);
+  input.addEventListener("input", function handll(event){
+    message.remove();
+    input.removeEventListener("input", handll);
+  })
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 //login 
 
@@ -578,7 +649,7 @@ function setFormError(form, errors) {
     if (Object.keys(errors).length) {
       InvalidButtonSingIn();
       errors.email = 'This combination, mail and password were not found!';
-      removeArr = setFormError(signIn, errors);
+     setFormError(signIn, errors);
       isLoadingRegister = false;
       isLoadingLogin = false;
       return 
@@ -597,7 +668,8 @@ function setFormError(form, errors) {
       .then(res => res.json())
       .then(res => { 
         ValidButtonSingIn();
-        if (res.success) {
+        setFormE(signIn, errors);
+         if (res.success) {         
           loaderinner.innerHTML = '';
            setTimeout(function () {
             alert('Пользователь успешно вошел, ID:\n' + res.data.userId)
@@ -628,54 +700,6 @@ function setFormError(form, errors) {
 })();
 
 headerUpdate();
-
-function setInvalid(input) {
-  function handl() {
-    input.removeEventListener('input', handl);
-    input.classList.remove("invalidInput");
-  }
-  input.classList.add("invalidInput");
-  input.addEventListener('input', handl);
-  return handl;
-}
-function giveInputFeedback(input, error) {
-  function handl() {
-    message.remove();
-    input.removeEventListener('input', handl);
-  }
-
-  input.classList.add("invalidInput");
-  let message = document.createElement('div');
-  message.classList.add("invalidMessage");
-  message.innerText = error;
-  input.insertAdjacentElement("afterend", message);
-
-  input.addEventListener('input', handl);
-  return handl;
-}
-
-function setFormError(form, errors) {
-  let removeArr = [];
-  let inputs = form.querySelectorAll('input');
-  let textareas = form.querySelectorAll('textarea');
-
-  for (let input of inputs) {
-    if (errors[input.name]) {
-      const remove1 = setInvalid(input);
-      const remove2 = giveInputFeedback(input, errors[input.name]);
-      removeArr.push(remove1, remove2);
-    }
-  }
-
-  for (let textarea of textareas) {
-    if (errors[textarea.name]) {
-      const remove3 = setInvalid(textarea);
-      const remove4 = giveInputFeedback(input, errors[textarea.name]);
-      removeArr.push(remove3, remove4);
-    }
-  }
-  return removeArr;
-}
 
 //fetch
 
