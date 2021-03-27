@@ -33,7 +33,7 @@ form.addEventListener('submit', function submit(event) {
     }
     setParamsToURL(fullData);
 
-    result.innerHTML = preloaderCreaterblog();       
+    result.innerHTML = preloaderCreaterblog();
     getPost(fullData, function callback(xhr) {
         const response = JSON.parse(xhr.response);
         if (response.success) {
@@ -73,25 +73,25 @@ reset.addEventListener('click', function () {
 buttonPrev.addEventListener('click', function () {
     if (fullData.page <= 0) {
         buttonPrev.classList.add('pagination__button_disabled');
-        return          
+        return
     } else {
         console.log(fullData.page);
-        fullData.page -= 1;      
-        formSubmit.click(); 
+        fullData.page -= 1;
+        formSubmit.click();
         buttonPrev.classList.remove('pagination__button_disabled');
     }
 })
 buttonNext.addEventListener('click', function () {
-    if (fullData.page >= links.length - 1) {    
-         buttonNext.classList.add('pagination__button_disabled');
-         return   
-         
+    if (fullData.page >= links.length - 1) {
+        buttonNext.classList.add('pagination__button_disabled');
+        return
+
     }
     fullData.page += 1;
-    formSubmit.click();     
+    formSubmit.click();
 })
 
- 
+
 function setActiveSlide() {
     if (fullData.page <= 0) {
         return;
@@ -149,17 +149,17 @@ function getParamsFromURL() {
     return params;
 }
 
-function getTags() {       
+function getTags() {
     let xhr = new XMLHttpRequest();
     const box = document.querySelector('.tagBox_js');
 
-    xhr.open('GET', `${SERVER_URL}/api/tags`);    
-    box.innerHTML = preloaderCreaterblog();      
+    xhr.open('GET', `${SERVER_URL}/api/tags`);
+    box.innerHTML = preloaderCreaterblog();
     xhr.send();
-    
+
     xhr.onload = function () {
         const response = JSON.parse(xhr.response);
-        
+
         if (response.success) {
             box.innerHTML = '';
             for (let tag of response.data) {
@@ -171,8 +171,8 @@ function getTags() {
     };
     xhr.onerror = function () {
         console.error('Error. Try again.');
-    };            
-};   
+    };
+};
 
 //color checkbox 
 

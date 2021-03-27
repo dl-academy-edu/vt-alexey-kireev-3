@@ -38,27 +38,27 @@ function getUserDate() {
   fetchData({
     method: 'GET',
     url: `/api/users/${userId}`,
-  
+
   })
-    .then(res => { 
-      return res.json();  
+    .then(res => {
+      return res.json();
     })
     .then(res => {
-   
+
       if (res.success) {
         userData = res.data;
         photo.style.cssText = `background-image: url('${SERVER_URL + userData.photoUrl}');
         background-position: center;
         background-size: cover;`
         rerenderUser(userData);
-  
+
       } else {
-        throw res;   
+        throw res;
       }
 
     })
     .catch(err => {
-      console.error(err);   
+      console.error(err);
       return window.location = '/';
     })
 }
@@ -119,8 +119,8 @@ function getUserDate() {
 })();
 
 changeData.addEventListener('submit', function (e) {
-  changeUserData(e); 
-  setTimeout(function(){
+  changeUserData(e);
+  setTimeout(function () {
     location.reload();
   }, 1000);
 })
@@ -195,13 +195,13 @@ function changeUserPassword(e) {
   removeArr.forEach(fn => fn());
   if (Object.keys(errors).length) {
     InvalidButtonpassword()
-   setFormError(changePassword, errors);
+    setFormError(changePassword, errors);
     isLoadingChangePassword = false;
     return
   }
 
 
-  loaderinner.innerHTML = preloaderCreater();      
+  loaderinner.innerHTML = preloaderCreater();
 
   fetchData({
     method: 'PUT',
@@ -213,29 +213,29 @@ function changeUserPassword(e) {
     }
   })
 
-  .then(res => res.json())
-  .then(res => {
-    ValidButtonpassword(); 
-    loaderinner.innerHTML = '';
-    setFormvalid(changePassword, body);       
-    if (res.success) {       
-      setTimeout(function () {
-      userData = res.data;
-      rerenderUser(userData);
-      changePassword.classList.remove('popup_open');
+    .then(res => res.json())
+    .then(res => {
+      ValidButtonpassword();
+      loaderinner.innerHTML = '';
+      setFormvalid(changePassword, body);
+      if (res.success) {
+        setTimeout(function () {
+          userData = res.data;
+          rerenderUser(userData);
+          changePassword.classList.remove('popup_open');
+          isLoadingChangePassword = false;
+        }, 1000);
+      } else {
+        throw res;
+      }
+    })
+    .catch(() => {
+      for (key in err.errors) {
+        setFormError(e.target, err.errors);
+      }
+      window.location = '/';
       isLoadingChangePassword = false;
-    }, 1000);
-    } else {
-      throw res;
-    }
-  })
-  .catch(() => {
-    for (key in err.errors) {
-      setFormError(e.target, err.errors);
-    }
-    window.location = '/';
-    isLoadingChangePassword = false;
-  })
+    })
 
 }
 
@@ -323,9 +323,9 @@ if (window.FileList && window.File) {
       const span = document.createElement('span');
       const name = file.name ? file.name : 'NOT SUPPORTED';
       span.textContent = `${name}`;
-      output.appendChild(span); 
+      output.appendChild(span);
     }
-  }); 
- 
+  });
+
 }
 
