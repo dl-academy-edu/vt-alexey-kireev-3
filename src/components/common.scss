@@ -251,24 +251,30 @@ img {
     }
 
     &_message-bad {
-      top: 39%;
-      right: 35%;
+      position: initial;
+      transform: translate(27px,-24px);
 
       @media screen and (max-width: $sm) {
+        position: absolute;
         top: 20px;
         right: 0;
         left: 10px;
+
+        transform: inherit;
       }
     }
 
     &_message-good {
-      top: 47%;
-      right: 37%;
+      position: initial;
+      transform: translate(232px, -56px);
 
       @media screen and (max-width: $sm) {
+        position: absolute;
         top: 20px;
         right: 0;
         left: 10px;
+
+        transform: inherit;
       }
     }
 

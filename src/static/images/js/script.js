@@ -209,7 +209,7 @@ function preloaderCreaterblog() {
     removeArr.forEach(fn => fn());
     if (Object.keys(errors).length) {
       InvalidButtonreg()
-      removeArr = setFormError(registerForm, errors);
+    setFormError(registerForm, errors);
       isLoadingRegister = false;
       return
     }
@@ -228,6 +228,7 @@ function preloaderCreaterblog() {
         return res.json();
       })
       .then(res => {
+        setFormvalid(registerForm, data);
 
         if (res.success) {
           ValidButtonreg();
@@ -462,21 +463,13 @@ function getFormData(form, data = {}, type ='json'){
             break;
         }
     }
-  let textareas = form.querySelectorAll('textarea');
-    for (let textarea of textareas) {
-      data[textarea.name] = textarea.value;
-    }
+ 
   return data;
   } else {
     return new FormData(form);
   }
  
 }
- 
-
-
-
-
 
 //invalid form
 
@@ -508,7 +501,6 @@ function giveInputFeedback(input, error) {
 function setFormError (form, errors) {
   let removeArr = [];
   let inputs = form.querySelectorAll ('input');
-  let textareas = form.querySelectorAll('textarea');
 
   for (let input of inputs) {
     if(errors[input.name]){
@@ -518,18 +510,9 @@ function setFormError (form, errors) {
     }
   }
 
-  for (let textarea of textareas) { 
-    if(errors[textarea.name]) {
-      const remove3 = setInvalid(textarea);
-      const remove4 = giveInputFeedback(input, errors[textarea.name]);
-      removeArr.push(remove3, remove4);
-    }
-  }
+
   return removeArr;
 }
-
-
-
 
 
 // valid form
@@ -544,8 +527,6 @@ function setvalid(input) {
   return handll;
 }
 
-
-
 function giveInputFeedbackk(input) {
   function handll (){
     message.remove();
@@ -554,7 +535,7 @@ function giveInputFeedbackk(input) {
 
   input.classList.add ("validInput");
   let message = document.createElement('div');
-  message.classList.add ("validMessage");
+  message.classList.add ("valid-feedback");
   message.innerText = 'All right';
   input.insertAdjacentElement("afterend",message);
 
@@ -562,12 +543,9 @@ function giveInputFeedbackk(input) {
   return handll;
 }
 
-
-
-function setFormE (form, errors) {
+function setFormvalid (form, errors) {
   let removeArr = [];
   let inputs = form.querySelectorAll ('input');
-  let textareas = form.querySelectorAll('textarea');
 
   for (let input of inputs) {
     if(errors[input.name]){
@@ -576,14 +554,7 @@ function setFormE (form, errors) {
       removeArr.push(remove1, remove2);
     }
   }
-
-  for (let textarea of textareas) { 
-    if(errors[textarea.name]) {
-      const remove3 = setvalid(textarea);
-      const remove4 = giveInputFeedbackk(input, errors[textarea.name]);
-      removeArr.push(remove3, remove4);
-    }
-  }
+ 
   return removeArr;
 }
 
@@ -604,29 +575,6 @@ function verifiedMessageInputCreate (input) {
     input.removeEventListener("input", handll);
   })
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 //login 
@@ -668,8 +616,9 @@ function verifiedMessageInputCreate (input) {
       .then(res => res.json())
       .then(res => { 
         ValidButtonSingIn();
-        setFormE(signIn, errors);
-         if (res.success) {         
+
+         if (res.success) {  
+          setFormvalid(signIn,data);       
           loaderinner.innerHTML = '';
            setTimeout(function () {
             alert('Пользователь успешно вошел, ID:\n' + res.data.userId)
@@ -734,11 +683,7 @@ function setValueToForm(form, data) {
         break;
     }
   }
-  let textareas = form.querySelectorAll('textarea');
-  for (let textarea of textareas) {
-    if (data[textarea.name])
-      textarea.value = data[textarea.name];
-  }
+
   return data;
 }
 
@@ -992,7 +937,7 @@ function sendMessage(event) {
   removeArr.forEach(fn => fn());
   if (Object.keys(errors).length) {
     InvalidButtonmessage();
-    removeArr = setFormError(event.target, errors);
+    setFormError(event.target, errors);
     isSending = false;
     return
   }
@@ -1010,19 +955,29 @@ function sendMessage(event) {
     }
 
   })
-    .then(res => res.json())
-    .then(res => {   
-       ValidButtonmessage(); 
-      if (res.success)
+
+  .then(res => res.json())
+  .then(res => {    setFormvalid(event.target, data);
+
+    if (res.success)
+        ValidButtonmessage(); 
+      if (res.success) 
       loaderinner.innerHTML = "";  
       setTimeout(function () {
         loaderinner.innerHTML = "";  
         MessageOpenpopup.classList.remove('popup_open');
       Massagegood.classList.add('popup_open');
       }, 1000);
-    }
-    )
+  }
+  )
+  .catch(err => {
+    loaderinner.innerHTML = "";  
+    MessageOpenpopup.classList.remove('popup_open');
+  Massagebad.classList.add('popup_open');
+  })
 }
+
+    
 // Open popup Message good
 (function () {
 

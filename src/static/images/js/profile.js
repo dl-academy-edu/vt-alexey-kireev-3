@@ -31,7 +31,6 @@ function rerenderUser(userData) {
 
 function getUserDate() {
 
-
   if (!token || !userId) {
     return window.location = '/';
   }
@@ -40,7 +39,6 @@ function getUserDate() {
     method: 'GET',
     url: `/api/users/${userId}`,
   
-
   })
     .then(res => { 
       return res.json();  
@@ -49,7 +47,6 @@ function getUserDate() {
    
       if (res.success) {
         userData = res.data;
-
         photo.style.cssText = `background-image: url('${SERVER_URL + userData.photoUrl}');
         background-position: center;
         background-size: cover;`
@@ -118,8 +115,6 @@ function getUserDate() {
       changePassword.classList.remove('popup_open');
     }
   })
-
-
 
 })();
 
@@ -200,10 +195,14 @@ function changeUserPassword(e) {
   removeArr.forEach(fn => fn());
   if (Object.keys(errors).length) {
     InvalidButtonpassword()
-    removeArr = setFormError(changePassword, errors);
+   setFormError(changePassword, errors);
     isLoadingChangePassword = false;
     return
   }
+
+
+  loaderinner.innerHTML = preloaderCreater();      
+
   fetchData({
     method: 'PUT',
     url: '/api/users',
@@ -213,28 +212,33 @@ function changeUserPassword(e) {
       'Content-Type': 'application/json;charset=utf-8',
     }
   })
-    .then(res => res.json())
-    .then(res => {
 
-      if (res.success) {      
-        ValidButtonpassword(); 
-        userData = res.data;
-        rerenderUser(userData);
-        changePassword.classList.remove('popup_open');
-        isLoadingChangePassword = false;
-      } else {
-        throw res;
-      }
-    })
-    .catch(() => {
-      for (key in err.errors) {
-        setFormError(e.target, err.errors);
-      }
-      window.location = '/';
+  .then(res => res.json())
+  .then(res => {
+    ValidButtonpassword(); 
+    loaderinner.innerHTML = '';
+    setFormvalid(changePassword, body);       
+    if (res.success) {       
+      setTimeout(function () {
+      userData = res.data;
+      rerenderUser(userData);
+      changePassword.classList.remove('popup_open');
       isLoadingChangePassword = false;
-    })
+    }, 1000);
+    } else {
+      throw res;
+    }
+  })
+  .catch(() => {
+    for (key in err.errors) {
+      setFormError(e.target, err.errors);
+    }
+    window.location = '/';
+    isLoadingChangePassword = false;
+  })
 
 }
+
 
 
 function validateDataPassword(data, errors = {}) {
