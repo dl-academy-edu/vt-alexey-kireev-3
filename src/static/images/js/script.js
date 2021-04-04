@@ -1,6 +1,6 @@
 const SERVER_URL = 'https://academy.directlinedev.com';
 const VERSION_API = '1.0.0';
-ы
+
 const SingInpopup = document.querySelector('.SignIn-popup_js');
 const mobileSingInpopup = document.querySelector('.mobile-SignIn-popup_js');
 const SignInpopup = document.querySelector('.SignInOpen-popup_js');
