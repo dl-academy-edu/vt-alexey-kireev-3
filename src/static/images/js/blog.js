@@ -244,9 +244,9 @@ function postCreater(post) {
     return `<div class="card__box">
     <div class="card__inner-img">
 <picture class="card__img">
-<source srcset="${SERVER_URL}${post.photo.mobilePhotoUrl}, ${SERVER_URL}${post.photo.mobile2xPhotoUrl}" media="(max-width: 640px)" alt="${post.title}">
-<source srcset="${SERVER_URL}${post.photo.tabletPhotoUrl}, ${SERVER_URL}${post.photo.tablet2xPhotoUrl}" media="(max-width: 1023px)" alt="${post.title}">
-<source srcset="${SERVER_URL}${post.photo.desktopPhotoUrl}, ${SERVER_URL}${post.photo.desktop2xPhotoUrl}" alt="${post.title}">
+<source srcset="${SERVER_URL}${post.photo.mobilePhotoUrl}, ${SERVER_URL}${post.photo.mobile2xPhotoUrl} 2x" media="(max-width: 640px)">
+<source srcset="${SERVER_URL}${post.photo.tabletPhotoUrl}, ${SERVER_URL}${post.photo.tablet2xPhotoUrl} 2x" media="(max-width: 1023px)">
+<source srcset="${SERVER_URL}${post.photo.desktopPhotoUrl}, ${SERVER_URL}${post.photo.desktop2xPhotoUrl} 2x">
 <img src="${SERVER_URL}${post.photo.desktopPhotoUrl}" width="320" height="236" alt="${post.title}"/>
 </picture>
 </div>
@@ -313,7 +313,7 @@ function makeTagsPost(post) {
 function postTagCreater(tag) {
     return `
     <li class="card__tags">
-        <span class="card__tag" name= "${tag.name}" style="background-color: ${tag.color};"></span>
+        <span class="card__tag" style="background-color: ${tag.color};" title="${tag.name}"></span>
     </li>`
 };
 

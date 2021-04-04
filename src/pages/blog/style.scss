@@ -545,14 +545,14 @@
  @media screen and (max-width: $md) {
   min-width: 314px;
   max-width: 314px;
-  max-height: 268px;
+  max-height: 266px;
       height: 350px;
 
       margin-bottom: 50px;
     }
 
     @media screen and (max-width: $sm) {
-      margin-bottom: 60px;
+    margin: 0px auto 60px auto;
     }
 
     @media screen and (max-width: 365px) {

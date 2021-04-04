@@ -13,9 +13,9 @@
     <meta name="description" content="Blog" />
 </head>
 
-<body>
+<body data-id-page="blog">
     @@include('header/index.html')
-    <main data-id-page="blog">
+    <main>
         <section class="blog container">
             <div class="blog__inner-title">
                 <h1 class="blog__title">My blog
@@ -39,7 +39,6 @@
                         <input class="views__input hidden hidden_focus" type="radio" name="views" value="100-500">
                         <span class="views__text">100-500</span>
                         <span class="views__box"></span>
-
                     </label>
                     
                     <label class="views__label">
@@ -143,8 +142,10 @@
         </article>
         <button class="scroll scroll_hidden scroll_js" type="button" aria-label="Вверх"></button>
     </main>
-    @@include('footer/index.html')
-    @@include('Message/index.html')  
+    @@include('footer/index.html', { 
+        "class": "footer_background"
+      })   
+       @@include('Message/index.html')  
     <div class="loaderinner loaderinner_js"></div>
     <script src="/static/images/js/script.js"></script>
     <script src="/static/images/js/blog.js"></script>

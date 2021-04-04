@@ -84,7 +84,7 @@
   }
 
   &__button {
-    padding: 7px 17px;
+    padding: 7px 15px;
     margin-bottom: 21px;
   }
 
@@ -113,6 +113,7 @@
 
     @media screen and (max-width: $md) {
       margin-top: 42px;
+      margin-bottom: 90px;
     }
 
     @media screen and (max-width: $sm) {

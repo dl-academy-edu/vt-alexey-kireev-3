@@ -1,6 +1,6 @@
 const SERVER_URL = 'https://academy.directlinedev.com';
 const VERSION_API = '1.0.0';
-ы
+
 const SingInpopup = document.querySelector('.SignIn-popup_js');
 const mobileSingInpopup = document.querySelector('.mobile-SignIn-popup_js');
 const SignInpopup = document.querySelector('.SignInOpen-popup_js');
@@ -30,7 +30,6 @@ const Buttonsend = document.querySelector('.Buttonsend_js');
 const Checkboxsend = document.querySelector('.Checkboxsend_js');
 
  
-
 
 //active page
 
@@ -676,137 +675,6 @@ function verifiedMessageInputCreate(input) {
 
 headerUpdate();
 
-
- 
-//send message
-(function () {
-  MassageForm.addEventListener('submit', function (e) {
-    sendMessage(e);
-  })
-
-})();
-
-function sendMessage(event) {
-  event.preventDefault();
-  let isSending = false;
-  let removeArr = [];
-
-  if (isSending) {
-    return
-  }
-  isSending = false;
-  let data = getFormData(event.target);
-  let errors = validateSendMessage(data);
-  removeArr.forEach(fn => fn());
-  if (Object.keys(errors).length) {
-    InvalidButtonmessage();
-    setFormError(event.target, errors);
-    isSending = false;
-    return
-  }
-  let items = {};
-  items.body = JSON.stringify(data);
-  items.to = '111@asdas.com'
-
-  loaderinner.innerHTML = preloaderCreater();
-
-  fetch(SERVER_URL + '/api/emails', {
-    method: 'POST',
-    body: JSON.stringify(items),
-    headers: {
-      'Content-Type': 'application/json;charset=utf-8',
-    }
-
-  })
-
-    .then(res => res.json())
-    .then(res => {
-      setFormvalid(event.target, data);
-        ValidButtonmessage();
-      if (res.success)
-        loaderinner.innerHTML = "";
-      setTimeout(function () {
-        loaderinner.innerHTML = "";
-        MessageOpenpopup.classList.remove('popup_open');
-        Massagegood.classList.add('popup_open');
-      }, 1000);
-    }
-    )
-    .catch(err => {
-      loaderinner.innerHTML = "";
-      MessageOpenpopup.classList.remove('popup_open');
-      Massagebad.classList.add('popup_open');
-    })
-}
-
- 
-// Open popup Message good
-(function () {
-
-  let lastFocus;
-
-  MessageButton.addEventListener('click', function () {
-
-    lastFocus = document.activeElement;
-
-    let close = Massagegood.querySelector('.popup__close');
-
-    close.addEventListener('click', exit);
-
-    window.addEventListener('keydown', keyDownEcs);
-
-
-    function keyDownEcs(event) {
-      if (event.code === 'Escape') {
-        exit();
-      }
-    }
-
-    function exit() {
-      close.removeEventListener('click', exit);
-      window.removeEventListener('keydown', keyDownEcs);
-      Massagegood.classList.remove('popup_open');
-      lastFocus.focus();
-    }
-  })
-})();
-
-
-// Open popup Message bad
-(function () {
-
-  let lastFocus;
-
-  MessageButton.addEventListener('click', function () {
-
-    lastFocus = document.activeElement;
-
-    let close = Massagebad.querySelector('.popup__close');
-
-    close.addEventListener('click', exit);
-
-    window.addEventListener('keydown', keyDownEcs);
-
-
-    function keyDownEcs(event) {
-      if (event.code === 'Escape') {
-        exit();
-      }
-    }
-
-    function exit() {
-      close.removeEventListener('click', exit);
-      window.removeEventListener('keydown', keyDownEcs);
-      Massagebad.classList.remove('popup_open');
-      lastFocus.focus();
-    }
-  })
-})();
-
- 
-
-
-
 //fetch
 
 function fetchData({ method = 'GET', url = '', body = null, headers = {} }) {
@@ -1076,3 +944,156 @@ function getRatings() {
 
 
  
+//send message
+(function () {
+  MassageForm.addEventListener('submit', function (e) {
+    sendMessage(e);
+  })
+
+})();
+
+function sendMessage(event) {
+  event.preventDefault();
+  let isSending = false;
+  let removeArr = [];
+
+  if (isSending) {
+    return
+  }
+  isSending = false;
+  let data = getFormData(event.target);
+  let errors = validateSendMessage(data);
+  removeArr.forEach(fn => fn());
+  if (Object.keys(errors).length) {
+    InvalidButtonmessage();
+    setFormError(event.target, errors);
+    isSending = false;
+    return
+  }
+  let items = {};
+  items.body = JSON.stringify(data);
+  items.to = '111@asdas.com'
+
+  loaderinner.innerHTML = preloaderCreater();
+
+  fetch(SERVER_URL + '/api/emails', {
+    method: 'POST',
+    body: JSON.stringify(items),
+    headers: {
+      'Content-Type': 'application/json;charset=utf-8',
+    }
+
+  })
+
+    .then(res => res.json())
+    .then(res => {
+      setFormvalid(event.target, data);
+        ValidButtonmessage();
+      if (res.success)
+        loaderinner.innerHTML = "";
+      setTimeout(function () {
+        loaderinner.innerHTML = "";
+        MessageOpenpopup.classList.remove('popup_open');
+        Massagegood.classList.add('popup_open');
+      }, 1000);
+    }
+    )
+    .catch(err => {
+      loaderinner.innerHTML = "";
+      MessageOpenpopup.classList.remove('popup_open');
+      Massagebad.classList.add('popup_open');
+    })
+}
+
+ 
+// Open popup Message good
+(function () {
+
+  let lastFocus;
+
+  MessageButton.addEventListener('click', function () {
+
+    lastFocus = document.activeElement;
+
+    let close = Massagegood.querySelector('.popup__close');
+
+    close.addEventListener('click', exit);
+
+    window.addEventListener('keydown', keyDownEcs);
+
+
+    function keyDownEcs(event) {
+      if (event.code === 'Escape') {
+        exit();
+      }
+    }
+
+    function exit() {
+      close.removeEventListener('click', exit);
+      window.removeEventListener('keydown', keyDownEcs);
+      Massagegood.classList.remove('popup_open');
+      lastFocus.focus();
+    }
+  })
+})();
+
+
+// Open popup Message bad
+(function () {
+
+  let lastFocus;
+
+  MessageButton.addEventListener('click', function () {
+
+    lastFocus = document.activeElement;
+
+    let close = Massagebad.querySelector('.popup__close');
+
+    close.addEventListener('click', exit);
+
+    window.addEventListener('keydown', keyDownEcs);
+
+
+    function keyDownEcs(event) {
+      if (event.code === 'Escape') {
+        exit();
+      }
+    }
+
+    function exit() {
+      close.removeEventListener('click', exit);
+      window.removeEventListener('keydown', keyDownEcs);
+      Massagebad.classList.remove('popup_open');
+      lastFocus.focus();
+    }
+  })
+})();
+
+ 
+//Кнопка наверх
+(function () {
+  function trackScroll() {
+    let scrolled = window.pageYOffset;
+
+    if (scrolled < 1500) {
+      goTopBtn.classList.add('scroll_hidden');
+    }
+    if (scrolled > 1500) {
+      goTopBtn.classList.remove('scroll_hidden');
+    }
+  }
+
+  function backToTop() {
+    let scrollStep = window.pageYOffset / 50;
+    if (window.pageYOffset > 0) {
+      window.scrollBy(0, -(scrollStep));
+      setTimeout(backToTop, 0);
+    }
+  }
+
+  let goTopBtn = document.querySelector('.scroll_js');
+
+  window.addEventListener('scroll', trackScroll);
+  goTopBtn.addEventListener('click', backToTop);
+})();
+
