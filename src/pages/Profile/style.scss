@@ -1,0 +1,146 @@
+@import "./../../components/vars";
+@import "../../components/Profile/Profile";
+
+.profile {
+  &__title {
+    font-family: "Gilroy", Arial, sans-serif;
+
+    font-weight: bold;
+    font-size: 47px;
+    line-height: 57px;
+
+    color: #070707;
+
+    @media screen and (max-width: $sm) {
+      max-width: 205px;
+      margin: 40px 0 25px 3px;
+    }
+  }
+
+  &__avatar {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    width: 100.5%;
+    height: 100.5%;
+    max-width: initial;
+
+    @media screen and (max-width: $sm) {
+      margin: auto;
+    }
+
+    @media screen and (max-width: $mo) {
+      height: auto;
+      padding-top: 153%;
+    }
+  }
+
+  &__inner-avatar {
+    position: relative;
+    overflow: hidden;
+
+    width: 320px;
+    height: 450px;
+
+    padding-bottom: 45%;
+
+    margin-right: 105px;
+
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.25);
+
+    @media screen and (max-width: $md) {
+      width: 314px;
+      margin-right: 77px;
+    }
+
+    @media screen and (max-width: $sm) {
+      max-width: 280px;
+      width: 100%;
+      margin: 0 auto;
+    }
+  }
+
+  &__inner-info {
+    margin-top: -16px;
+
+    @media screen and (max-width: $sm) {
+      margin: 25px 0 0 21px;
+    }
+  }
+
+  &__img {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    width: 100.5%;
+    height: 100.5%;
+    max-width: initial;
+  }
+
+  &__button {
+    padding: 7px 15px;
+    margin-bottom: 21px;
+  }
+
+  &__list {
+    margin-bottom: 33px;
+  }
+
+  &__item {
+    margin-bottom: 19.5px;
+  }
+
+  &__inner-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 40px 0 25px 3px;
+    @media screen and (max-width: $sm) {
+      margin: 40px 0 -5px 3px;
+    }
+  }
+
+  &__wrapper {
+    align-items: flex-start;
+    display: flex;
+    margin-top: 42px;
+
+    @media screen and (max-width: $md) {
+      margin-top: 42px;
+      margin-bottom: 90px;
+    }
+
+    @media screen and (max-width: $sm) {
+      flex-direction: column;
+      margin: 15px -25px 0px -14px;
+    }
+  }
+
+  &__text {
+    font-family: "Gilroy", Arial, sans-serif;
+
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 22px;
+
+    color: #070707;
+  }
+
+  &__text-info {
+    font-family: "Gilroy", Arial, sans-serif;
+
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 21px;
+
+    color: #070707;
+
+    margin-left: 12px;
+  }
+}

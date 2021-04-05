@@ -1,0 +1,484 @@
+@import "./../../components/vars";
+
+.slider {
+  margin-top: 40px;
+  &__inner {
+    display: flex;
+    align-items: flex-end;
+    margin-bottom: 36px;
+
+    @media screen and (max-width: $sm) {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      justify-content: space-between;
+
+      margin-bottom: 27px;
+    }
+  }
+  &__title {
+    max-width: 280px;
+    font-family: "Gilroy", Arial, sans-serif;
+    font-size: 47px;
+    line-height: 57px;
+
+    color: #070707;
+
+    @media screen and (max-width: $sm) {
+      margin-right: 120px;
+      margin-bottom: 20px;
+    }
+  }
+  &__description {
+    display: inline-block;
+    margin-left: 40px;
+    margin-bottom: 8px;
+    max-width: 226px;
+    font-family: "Gilroy", Arial, sans-serif;
+    font-size: 18px;
+    line-height: 21px;
+
+    color: #070707;
+
+    @media screen and (max-width: $sm) {
+      max-width: 205px;
+      margin-left: 0;
+    }
+  }
+
+  &__wrapper {
+    position: relative;
+    overflow: hidden;
+  }
+  &__inner-wrapper {
+    display: flex;
+
+  }
+
+  &__img {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    width: 100%;
+    height: 100.5%;
+    max-width: initial;
+  }
+
+  &__slide {
+
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+
+    position: relative;
+    padding-top: 46.5%;
+    background-color: #a7a7a7;
+
+    @media screen and (max-width: 768px) {
+      padding-top: 71.5%;
+    }
+
+    @media screen and (max-width: 375px) {
+      padding-top: 166%;
+    }
+  }
+
+  &__bottom-panel {
+    margin-top: 28px;
+    margin-bottom: 56px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    @media screen and (max-width: $md) {
+      margin-top: 40px;
+    }
+
+    @media screen and (max-width: $sm) {
+      margin: 20px 1px 24px -3px;
+    }
+  }
+
+  &__button {
+    cursor: pointer;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 7px 10px;
+    border: 2.5px solid #070707;
+    border-radius: 21px;
+
+    background-color: transparent;
+    transition: opacity $duration linear;
+
+    &:not(:disabled):hover,
+    &:not(:disabled):focus {
+      cursor: pointer;
+      opacity: 0.7;
+    }
+    &:disabled {
+      cursor: no-drop;
+      opacity: 0.4;
+    }
+
+    &_next {
+      transform: rotate(180deg);
+    }
+  }
+
+  &__button2 {
+    padding: 0;
+    border: none;
+  }
+
+  &__pagination {
+    padding: 10px;
+    margin: 7px -7px 0px 0px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    @media screen and (max-width: $sm) {
+      margin: 23px -7px 0 0;
+    }
+
+    &_none {
+      display: none;
+    }
+  }
+
+  &__dot {
+    cursor: pointer;
+    margin-right: 5px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    width: 10px;
+    height: 10px;
+    background: #e5e5e5;
+    border: none;
+    transition: background-color $duration linear;
+
+    &:hover {
+      background-color: #828282;
+    }
+    &_active {
+      background: #070707;
+    }
+  }
+}
+
+.about-me {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  max-width: 100%;
+  background-color: #f6f6f6;
+
+  &__inner {
+    display: block;
+
+    margin: 50px 100px 45px 0;
+
+    @media screen and (max-width: $sm) {
+      margin: 30px 0px 5px -2px;
+    }
+  }
+
+  &__title {
+    margin-top: 60px;
+
+    font-family: "Gilroy", Arial, sans-serif;
+    font-weight: bold;
+    font-size: 34px;
+    line-height: 41px;
+    color: #070707;
+
+    @media screen and (max-width: $sm) {
+      margin-top: 40px;
+    }
+  }
+
+  &__text {
+    max-width: 474px;
+    padding: 14px 13px 37px;
+    justify-content: center;
+    display: inline-flex;
+    align-items: center;
+    font-family: "Gilroy", Arial, sans-serif;
+    font-size: 18px;
+    line-height: 21px;
+    color: #070707;
+
+    &_out {
+      transform: scale(-1, 1);
+    }
+  }
+
+  &__chat {
+    display: block;
+    max-width: 482px;
+    margin-bottom: 14px;
+
+    border-image-source: url(/static/images/chat.png);
+    border-style: solid;
+    border-image-width: 30px;
+    border-image-slice: 30;
+    border-image-repeat: round;
+
+
+    &_out {
+      position: relative;
+      transform: scale(-1, 1);
+      left: 100px;
+      @media screen and (max-width: $sm) {
+        left: 0px;
+      }
+    }
+  }
+}
+
+.skills {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+
+  &__title {
+    margin-top: 60px;
+    margin-bottom: 21px;
+
+    font-family: "Gilroy", Arial, sans-serif;
+
+    font-weight: bold;
+    font-size: 34px;
+    line-height: 41px;
+
+    color: #070707;
+
+    @media screen and (max-width: $sm) {
+      margin-bottom: 11px;
+    }
+  }
+
+  &__description {
+    margin-bottom: 36px;
+
+    font-family: "Gilroy", Arial, sans-serif;
+
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 21px;
+
+    color: #070707;
+  }
+
+  &__list {
+    margin: 15px -12px 16px -12px;
+    display: flex;
+    flex-wrap: wrap;
+
+    @media screen and (max-width: $sm) {
+      margin: 4px -12px -23px -12px;
+    }
+
+    @media screen and (max-width: 319px) {
+      display: block;
+    }
+  }
+
+  &__item {
+    margin: 0 0px 41px 0px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+  width: 20%;
+  
+  @media screen and (max-width: 1400px) {
+    width: 25%;
+  }
+
+  @media screen and (max-width: 760px) {
+    width: 50%;
+  }
+  @media screen and (max-width: 319px) {
+    width: 100%;
+  }
+  }
+  
+  &__name,
+  &__value {
+    font-family: "Gilroy", Arial, sans-serif;
+
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 17px;
+
+    color: #828282;
+  }
+
+  &__name {
+    margin: 20px 0 24px;
+  }
+
+  &__value {
+    margin-right: 13px;
+
+    &::after {
+      content: "%";
+    }
+  }
+
+  &__inner {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  &__level {
+    position: relative;
+    display: inline-block;
+
+    &::before {
+      content: "";
+      display: block;
+      width: 142px;
+      height: 9px;
+      background: #e5e5e5;
+
+      @media screen and (max-width: $md) {
+        width: 111px;
+      }
+
+      @media screen and (max-width: $sm) {
+        width: 94px;
+      }
+    }
+  }
+
+  &__level-inner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 0%;
+
+    &::before {
+      content: "";
+
+      display: block;
+      width: 142px;
+      height: 9px;
+      background: #070707;
+    }
+  }
+}
+
+.portfolio {
+  position: relative;
+  text-align: center;
+  width: 100%;
+  max-width: 100%;
+  &::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: -57px;
+    z-index: -1;
+    background: #f6f6f6;
+  }
+
+  &__title {
+    margin: 62px 0 52px;
+    display: inline-block;
+
+    font-family: "Gilroy", Arial, sans-serif;
+
+    font-weight: bold;
+    font-size: 34px;
+    line-height: 41px;
+
+    color: #070707;
+
+    @media screen and (max-width: $sm) {
+      margin: 60px 0 30px;
+    }
+  }
+
+  &__slide-title {
+    margin: 31px 20px 16px 20px;
+
+    font-family: "Gilroy", Arial, sans-serif;
+
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 21px;
+
+    border-bottom: 1px dashed #ffffff;
+
+    color: #ffffff;
+
+    &:hover {
+      border-bottom: 1px solid #ffffff;
+    }
+
+    @media screen and (max-width: $sm) {
+      margin: 20px 20px 16px;
+      text-decoration: 1px underline #fff dashed;
+      border-bottom: none;
+    }
+  }
+
+  &__slide-description {
+    padding: 0 14px 35px;
+    font-family: "Gilroy", Arial, sans-serif;
+    max-width: 429px;
+
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 16px;
+
+    color: #ffffff;
+
+    @media screen and (max-width: $sm) {
+      padding: 0 14px 21px;
+    }
+  }
+
+  &__inner-description {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #000;
+    opacity: 0.8;
+    position: absolute;
+    bottom: 0;
+  }
+
+  &__img {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    width: 100%;
+    height: 100.5%;
+    max-width: initial;
+  }
+}

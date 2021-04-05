@@ -1,0 +1,95 @@
+.popup { 
+    &__box {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+    &__form {
+        &_register { 
+        width: 680px;
+        }
+    }
+    &__lable {
+        cursor: pointer;
+
+        &_width {
+            width: 48.5%;
+            
+        }
+    }
+    &__input {
+    
+    &_Message {
+        box-sizing: content-box;
+        border: 3px solid hsl(0, 0%, 90%);
+        min-height: 140px;
+        width: 100%;
+        max-width: 577px;
+        outline: none;
+        resize: none;
+        
+        &:focus {
+          border-color: #070707;
+        }
+    
+        &:hover {
+          border-color: #828282;
+        }
+      }
+    }
+    &__container {
+        display: flex;
+
+        &:hover .popup__checkboxText   {
+            color: #828282;
+        }
+        &:hover .popup__Checker  {
+            border: 2px solid #828282;
+        }
+    }
+    &__checkboxText {
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 16px;
+
+        color: #E5E5E5;
+        margin-left: 35px;
+    }
+    &__checkbox {
+ 
+        &:focus ~.popup__checkboxText   {
+            outline: 2px solid #000;
+            outline-offset: 2px;
+            color: #828282;
+        }
+        &:focus ~.popup__Checker  {
+            border: 2px solid #828282;
+        }
+
+       &:checked ~.popup__Checker::before {
+        content: "✔";
+        font-weight: 800;
+        font-size: 16px;
+        position: absolute;
+        display: inline-block;
+        width: 19px;
+        height: 19px;
+        transform: translate(2px, -1.5px)
+       }
+       &:checked ~.popup__checkboxText {
+           color: #070707;
+       }
+    }
+     &__Checker {
+        position: absolute;
+        display: block;
+        border: 2px solid #E5E5E5;
+        box-sizing: border-box;
+        border-radius: 3px;
+      
+        width: 19px;
+        height: 19px;
+      
+        align-items: center;
+     }
+}

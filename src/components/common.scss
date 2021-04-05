@@ -1,0 +1,408 @@
+@import "./vars";
+
+* {
+  font-family: "Gilroy", Arial, sans-serif;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #ffffff;
+}
+
+ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+a {
+  text-decoration: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin-top: 0;
+  margin-bottom: 0;
+  font-family: "Gilroy", Arial, sans-serif;
+}
+
+.container {
+  max-width: 1440px;
+  padding-left: 220px;
+  padding-right: 220px;
+  margin-right: auto;
+  margin-left: auto;
+
+  @media screen and (max-width: $lg) {
+    padding-right: 150px;
+    padding-left: 150px;
+  }
+
+  @media screen and (max-width: $md) {
+    padding-right: 60px;
+    padding-left: 60px;
+  }
+
+  @media screen and (max-width: $sm) {
+    padding-right: 20px;
+    padding-left: 20px;
+  }
+}
+
+fieldset {
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.hidden {
+  position: absolute;
+  display: block;
+  width: 0;
+  height: 0;
+  left: -9999px;
+
+  visibility: hidden;
+
+  &_focus {
+    visibility: initial;
+  }
+}
+
+.loader-inner {
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+
+
+  &__loader {
+    margin: auto;
+  
+    border: 16px solid #f3f3f3;
+    border-top: 16px solid #3498db;
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 2s linear infinite;
+  
+    z-index: 100;
+
+  }
+}
+
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.scroll {
+  position: fixed;
+
+  bottom: 30px;
+  right: 30px;
+  border: none;
+  background-color: transparent;
+
+  &::before {
+    content: url("/static/images/scroll.svg");
+    width: 42px;
+    height: 42px;
+  }
+
+  @media screen and (max-width: $md) {
+    display: none;
+  }
+
+  &_hidden {
+    display: none;
+  }
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.popup {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(246, 246, 246, 0.99);
+
+  z-index: 10;
+
+  @media screen and (max-width: $sm) {
+    background-color: white;
+  }
+
+  &_open {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    border: 3px solid #070707;
+    padding: 40px 40px 50px 40px;
+
+    background-color: #ffffff;
+
+    position: relative;
+
+    @media screen and (max-width: $sm) {
+      border: none;
+      padding: 40px 20px 50px 20px;
+    }
+  }
+  &__lable {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  &__text {
+    display: inline-block;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 16px;
+
+    color: #070707;
+    margin-bottom: 6px;
+  }
+  &__input {
+    border: 3px solid hsl(0, 0%, 90%);
+    height: 50px;
+    width: 100%;
+    padding-left: 10px;
+
+    &_bad {
+      border-color: red;
+    }
+
+    &_good {
+      border-color: green;
+    }
+
+    &:focus {
+      border-color: #070707;
+    }
+
+    &:hover {
+      border-color: #828282;
+    }
+  }
+
+  &__button {
+    margin-top: 10px;
+  }
+  &__close {
+    cursor: pointer;
+
+    position: absolute;
+    top: -3px;
+    right: -46px;
+    background-color: transparent;
+    border: none;
+
+    @media screen and (max-width: 768px) {
+      top: -40px;
+      right: -10px;
+    }
+    @media screen and (max-width: $sm) {
+      top: 0px;
+      right: 0;
+      left: 12px;
+    }
+    &_login,
+    &_password {
+      top: -3px;
+      right: -46px;
+      left: initial;
+
+      @media screen and (max-width: $sm) {
+        top: 0px;
+        right: 0;
+        left: 12px;
+      }
+    }
+
+    &_message-bad {
+      position: initial;
+      transform: translate(27px,-24px);
+
+      @media screen and (max-width: $sm) {
+        position: absolute;
+        top: 20px;
+        right: 0;
+        left: 10px;
+
+        transform: inherit;
+      }
+    }
+
+    &_message-good {
+      position: initial;
+      transform: translate(232px, -56px);
+
+      @media screen and (max-width: $sm) {
+        position: absolute;
+        top: 20px;
+        right: 0;
+        left: 10px;
+
+        transform: inherit;
+      }
+    }
+
+    &:hover svg rect,
+    &:focus svg rect {
+      fill: #070707;
+    }
+  }
+}
+
+.requiared::after {
+  content: "*";
+  color: red;
+  margin-left: 3px;
+}
+
+.invalidInput {
+  border-color: #eb3617;
+}
+
+.validInput {
+  border-color: #03BC3C;
+}
+
+.invalidMessage {
+  margin-top: 10px;
+  font-size: 14px;
+  line-height: 16px;
+
+  color: #eb3617;
+}
+
+.validMessage {
+  margin-top: 10px;
+  font-size: 14px;
+  line-height: 16px;
+
+  color: #03BC3C;
+}
+
+.invalid-feedback {
+  margin-top: 10px;
+  max-width: 290px;
+  font-size: 14px;
+  line-height: 16px;
+  color: rgb(255, 0, 0);
+}
+
+.valid-feedback {
+  margin-top: 10px;
+  max-width: 290px;
+  font-size: 14px;
+  line-height: 16px;
+  color: #03BC3C;
+}
+
+.button {
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 18px;
+
+  background-color: transparent;
+  color: black;
+
+  border-radius: 30px;
+  border: 2.5px solid #070707;
+
+  font-weight: bold;
+  font-family: "Gilroy", Arial, sans-serif;
+
+  font-size: 18px;
+  line-height: 22px;
+
+  transition: background-color $duration linear;
+
+  &:hover,
+  &:focus {
+    background-color: #070707;
+    color: #ffffff;
+  }
+  &_disabled {
+    cursor: no-drop;
+    opacity: 0.5;
+  }
+  &_social {
+    padding: 10px 16px;
+  }
+  &_black {
+    background-color: #070707;
+    color: #ffffff;
+  }
+
+  &_bad {
+    background-color: white;
+    color: red;
+    border-color: red;
+    &:hover,
+    &:focus,
+    &:active {
+      background-color: red;
+      border-color: red;
+      color: white;
+    }
+  }
+
+  &_good {
+    background-color: white;
+    color: green;
+    border-color: green;
+
+    &:hover,
+    &:focus,
+    &:active {
+      background-color: green;
+      border-color: green;
+      color: white;
+    }
+  }
+}
+
+// Подключение компонентов
+@import "./header/header";
+@import "./footer/footer";
+@import "./signIn/singin";
+@import "./register/register";
+@import "./Message/Massage";
+@import "./goodMessage/goodMessage";
+@import "./badMessage/badMessage";

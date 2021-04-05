@@ -1,0 +1,64 @@
+<header class="header container">
+  <div class="header__box">
+    <a class="header__link" href="/" aria-label="Go to Home" title="Home" data-id-nav="home">
+      Home
+    </a>
+    <nav>
+    <ul class="header__inner">
+      <li class="header__item">
+        <a class="header__link" href="/pages/blog" aria-label="Go to blog" title="My blog" data-id-nav="blog">My blog</a>
+      </li>
+      <li class="header__item SignIn-popup_js">
+        <button type="button" class="header__link" aria-label="Go to sign in" title="Sign in">Sign in</button>
+      </li>
+      <li class="header__item Register-popup_js">
+        <button type="button" class="header__link" aria-label="Go to register" title="Register">Register</button>
+      </li>
+      <li class="header__item profile_js">
+        <a href="/pages/profile" class="header__link" aria-label="Go to profile" title="Profile" data-id-nav="profile">To profile</a>
+      </li>
+      <li class="header__item singout_js">
+        <button class="header__link">Sign out</button>
+      </li>
+    </ul>
+  </nav>
+  </div>
+  <div class="mobile-header mobile-header_js mobile-header">
+    <div class="mobile-header__content">
+        <div class="mobile-header__wraper">
+            <nav aria-label="Навигация по сайту" class="mobile-header__nav">
+                <ul class="mobile-header__list">
+                    <li class="mobile-header__item">
+                        <a href="/" class="mobile-header__link" data-id-nav-mobile="home">Home</a>
+                    </li>
+                    <li class="mobile-header__item">
+                        <a href="/pages/blog" class="mobile-header__link" data-id-nav-mobile="blog">My blog</a>
+                    </li>
+                    <li class="mobile-header__item mobile-SignIn-popup_js">
+                      <button type="button" class="mobile-header__link">Sign in</button>
+                    </li>
+                    <li class="mobile-header__item mobile-Register-popup_js">
+                      <button type="button" class="mobile-header__link">Register</button>
+                    </li>
+                    <li class="mobile-header__item mobile-profile_js">
+                      <a href="/pages/profile" class="mobile-header__link" data-id-nav-mobile="profile">To profile</a>
+                    </li>
+                    <li class="mobile-header__item mobile-singout_js">
+                      <button class="mobile-header__link">Sign out</button>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <button class="mobile-header__close-button mobile-header__close-button_js">
+      <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="3.37256" width="32" height="4" rx="2" transform="rotate(45 3.37256 0)" fill="#070707"/>
+        <rect x="0.543945" y="22.6289" width="32" height="4" rx="2" transform="rotate(-45 0.543945 22.6289)" fill="#070707"/>
+        </svg>
+        
+    </button>
+</div>
+@@include('signIn/index.html')
+@@include('register/index.html')
+</header> 
+ 

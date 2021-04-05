@@ -1,0 +1,100 @@
+.footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &_background {
+        background-color: #F6F6F6;
+        margin-top: 60px;
+    }
+    
+&__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    margin-top: 120px;
+
+    @media screen and (max-width: $sm) {
+        margin-top: 82px;
+        }
+ 
+}
+
+&__title, &__description {
+    font-family: "Gilroy", Arial, sans-serif;
+    color: #070707;
+}
+
+&__title {
+    font-weight: bold;
+    font-size: 34px;
+    line-height: 41px;
+}
+
+&__description {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 21px;
+
+    max-width: 315px;
+    text-align: center;
+    padding: 20px 20px 30px 20px;
+
+    @media screen and (max-width: $sm) {
+        padding: 11px 0 40px;
+        }
+ 
+}
+
+&__message {
+        height: 43px;
+        width: 180px;
+}
+
+&__social {
+    margin: 40px 44px 27px 34px;
+    max-width: 400px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    @media screen and (max-width: $sm) {
+        margin: 42px 0px 27px -16px;
+        }
+}
+
+&__item {
+margin-bottom: 10px;
+margin-left: 12px;
+    
+}
+
+&__link {
+    height: 42px;
+    max-width: 159px;
+}
+
+&__design, &__code {
+    font-family: "Gilroy", Arial, sans-serif;
+    font-size: 14px;
+    line-height: 22px;
+    color: #828282;
+}
+
+&__code {
+    margin-bottom: 60px;
+}
+
+&__dl {
+    color: #828282;
+    border-bottom: 1px dashed #828282;
+
+    transition: color $duration linear;
+    &:hover {
+        color: black;
+        border-bottom: 1px solid #070707;
+    }
+}
+
+}

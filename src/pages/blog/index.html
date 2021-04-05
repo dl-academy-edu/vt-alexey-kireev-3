@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
+    <link href="/common.css" rel="stylesheet" />
+    <link href="style.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/static/fonts/stylesheet.css" />
+    <link rel="shortcut icon" href="/static/images/favicon.ico">
+    <title>Blog</title>
+    <meta name="description" content="Blog" />
+</head>
+
+<body data-id-page="blog">
+    @@include('header/index.html')
+    <main>
+        <section class="blog container">
+            <div class="blog__inner-title">
+                <h1 class="blog__title">My blog
+                </h1>
+                <button class="header__mobile-button header__mobile-button_blog header__mobile-button_js" type="button">
+                    <span class="header__mobile-icon"></span>
+                    <span class="header__mobile-icon"></span>
+                    <span class="header__mobile-icon"></span>
+                </button>
+            </div>
+            <form class="blog__form form_js">
+
+                <div class="blog__inner-tags tags">
+                    <h2 class="tags__title">Tags</h2>
+                    <div class="tags__list tagBox_js">
+                    </div>
+                </div>
+                <div class="blog__inner-views views">
+                    <h2 class="views__title">Views</h2>
+                    <label class="views__label">
+                        <input class="views__input hidden hidden_focus" type="radio" name="views" value="100-500">
+                        <span class="views__text">100-500</span>
+                        <span class="views__box"></span>
+                    </label>
+                    
+                    <label class="views__label">
+                        <input class="views__input hidden hidden_focus" type="radio" name="views" value="500-1000">
+                        <span class="views__text ">500-1000</span>
+                        <span class="views__box"></span>
+                    </label>
+                    <label class="views__label">
+                        <input class="views__input hidden hidden_focus" type="radio" name="views" value="1000-2000">
+                        <span class="views__text ">1000-2000</span>
+                        <span class="views__box"></span>
+                    </label>
+                </div>
+                <div class="blog__inner-comments comments">
+                    <h2 class="comments__title">Comments</h2>
+                    <label class="comments__label">
+                        <input class="comments__input hidden hidden_focus" type="checkbox" name="commentsCount" value="0">
+                        <span class="comments__text">0</span>
+                        <span class="comments__box"></span>
+                    </label>
+                    <label class="comments__label">
+                        <input class="comments__input hidden hidden_focus" type="checkbox" name="commentsCount" value="0-1">
+                        <span class="comments__text">0-1</span>
+                        <span class="comments__box"></span>
+                    </label>
+                    <label class="comments__label">
+                        <input class="comments__input hidden hidden_focus" type="checkbox" name="commentsCount" value="1-50">
+                        <span class="comments__text">1-50</span>
+                        <span class="comments__box"></span>
+                    </label>
+                </div>
+                <div class="blog__inner-show show">
+                    <h2 class="show__title">How show?</h2>
+                    <label class="show__label">
+                        <input class="show__input hidden hidden_focus" type="radio" name="limit" value="5">
+                        <span class="show__text">show 5</span>
+                        <span class="show__box"></span>
+                    </label>
+                    <label class="show__label">
+                        <input class="show__input hidden hidden_focus" checked="checked" type="radio" name="limit" value="10">
+                        <span class="show__text">show 10</span>
+                        <span class="show__box"></span>
+                    </label>
+                </div>
+                <div class="blog__inner-sort sort">
+                    <h2 class="sort__title">Sort by</h2>
+                    <label class="sort__label">
+                        <input class="sort__input hidden hidden_focus" type="radio" name="sorted" value="date">
+                        <span class="sort__text">date</span>
+                        <span class="sort__box"></span>
+                    </label>
+                    <label class="sort__label">
+                        <input class="sort__input hidden hidden_focus" type="radio" name="sorted" value="title">
+                        <span class="sort__text">title</span>
+                        <span class="sort__box"></span>
+                    </label>
+                    <label class="sort__label">
+                        <input class="sort__input hidden hidden_focus" type="radio" name="sorted" value="views">
+                        <span class="sort__text">views</span>
+                        <span class="sort__box"></span>
+                    </label>
+                </div>
+                <div class="blog__inner-sort reset">
+                    <span class="reset__title">reset form</span>
+                    <button class="button reset__button reset_js" type="button">Reset</button>
+                </div>
+                <div class="blog__inner-search search">
+                    <input class="search__input" type='text' name="title">
+                    <button class="button search__button formSubmit_js" type="submit" aria-label="Press search"
+                        title="Search">Search</button>
+                </div>
+            </form>
+        </section>
+
+        <article class="blog__content container">
+            <h2 class="hidden">Blog</h2>
+            <div class="row result_js"></div>
+            <div class="pagination">
+                <button class="pagination__button buttonPrev_js" type="button">
+                    <svg width="42" height="42" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="40.75" y="40.75" width="39.5" height="39.5" rx="19.75"
+                            transform="rotate(-180 40.75 40.75)" stroke="#070707" stroke-width="2.5" />
+                        <rect x="24.5791" y="32.6992" width="16.5512" height="3" rx="1.5"
+                            transform="rotate(-135 24.5791 32.6992)" fill="#070707" />
+                        <rect x="26.7002" y="11.4199" width="16.5512" height="3" rx="1.5"
+                            transform="rotate(135 26.7002 11.4199)" fill="#070707" />
+                    </svg>
+                </button>
+                <div class="pagination__number number_js"></div>
+                <button class="pagination__button buttonNext_js" type="button">
+                    <svg width="42" height="42" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="1.25" y="1.25006" width="39.5" height="39.5" rx="19.75" stroke="#070707"
+                            stroke-width="2.5" />
+                        <rect x="17.4209" y="9.30084" width="16.5512" height="3" rx="1.5"
+                            transform="rotate(45 17.4209 9.30084)" fill="#070707" />
+                        <rect x="15.2998" y="30.5801" width="16.5512" height="3" rx="1.5"
+                            transform="rotate(-45 15.2998 30.5801)" fill="#070707" />
+                    </svg>
+                </button>
+            </div>
+        </article>
+        <button class="scroll scroll_hidden scroll_js" type="button" aria-label="Вверх"></button>
+    </main>
+    @@include('footer/index.html', { 
+        "class": "footer_background"
+      })   
+       @@include('Message/index.html')  
+    <div class="loaderinner loaderinner_js"></div>
+    <script src="/static/images/js/script.js"></script>
+    <script src="/static/images/js/blog.js"></script>
+
+</body>
+</html>
